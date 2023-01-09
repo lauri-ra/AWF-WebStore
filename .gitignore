@@ -1,0 +1,5 @@
+elm-stuff
+node_modules
+elm/**/package-lock.json
+elm/**/index.js
+.DS_Store
