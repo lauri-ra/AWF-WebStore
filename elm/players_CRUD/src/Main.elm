@@ -56,7 +56,7 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    p [] [ text "Elm Exercise: Players CRUD" ]
+    h1 [] [ text "Elm Exercise: Players CRUD" ]
 
 
 main : Program () Model Msg
