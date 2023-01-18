@@ -12,10 +12,12 @@ export const register = async (req, res, next) => {
   } catch (err) {
     log('Registration failed');
     if (err instanceof UserValidationError) {
+      log('%O', err.details);
       res.status(400);
       return res.json(err.details);
     }
 
+    log(err.message);
     res.status(500);
     res.json({ error: err.message });
   }

@@ -21,6 +21,7 @@ export const addPlayer = async (req, res, next) => {
   } catch (err) {
     log('Player creation failed');
     if (err instanceof PlayerValidationError) {
+      log('%O', err.details);
       res.status(400);
       return res.json(err.details);
     }
@@ -37,6 +38,7 @@ export const removePlayer = async (req, res, next) => {
   } catch (err) {
     log('Player deletion failed');
     if (err instanceof PlayerNotFoundError) {
+      log(err.message);
       res.status(404);
       return res.json({ error: err.message });
     }
@@ -73,9 +75,11 @@ export const modifyPlayer = async (req, res, next) => {
   } catch (err) {
     log('Player update failed');
     if (err instanceof PlayerNotFoundError) {
+      log(err.message);
       res.status(404);
       return res.json({ error: err.message });
     } else if (err instanceof PlayerValidationError) {
+      log('%O', err.details);
       res.status(400);
       return res.json(err.details);
     }
@@ -92,6 +96,7 @@ export const showPlayer = (req, res, next) => {
   } catch (err) {
     log('Player fetching failed');
     if (err instanceof PlayerNotFoundError) {
+      log(err.message);
       res.status(404);
       return res.json({ error: err.message });
     }
