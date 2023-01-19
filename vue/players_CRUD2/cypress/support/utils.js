@@ -2,10 +2,12 @@
 
 // https://blog.dai.codes/cypress-loading-state-tests/
 
-import players from "../fixtures/players.json";
+import players from '../fixtures/players.json';
+import users from '../fixtures/users.json';
 
 export function interceptIndefinitely(requestMatcher, response) {
-	let sendResponse = () => { };
+	const expectedUser = users[0];
+	let sendResponse = () => {};
 	// Create a Promise and capture a reference to its resolve function so that we can resolve it when we want to:
 	const trigger = new Promise((resolve) => {
 		sendResponse = resolve;
@@ -14,7 +16,28 @@ export function interceptIndefinitely(requestMatcher, response) {
 	// Intercept requests to the URL we are loading data from and do not let the response occur until our above Promise is resolved
 	cy.intercept(requestMatcher, (request) => {
 		return trigger.then(() => {
-			request.reply(response);
+			// Request should contain headers with authorization information
+			if (requestMatcher != '**/api/users') {
+				if (!request.headers.authorization)
+					request.reply({ statusCode: 401, body: 'Unauthorized' });
+
+				if (!request.headers.authorization.includes('Basic'))
+					request.reply({ statusCode: 401, body: 'Unauthorized' });
+
+				const authHeader = request.headers.authorization.split(' ')[1];
+				const decodedAuthHeader = atob(authHeader);
+				const [username, password] = decodedAuthHeader.split(':');
+				if (
+					username === expectedUser.username &&
+					password === expectedUser.password
+				) {
+					request.reply(response);
+				} else {
+					request.reply({ statusCode: 401, body: 'Wrong user details' });
+				}
+			} else {
+				request.reply(response);
+			}
 		});
 	});
 
@@ -64,11 +87,9 @@ export const findAndClickButton = (buttonType) => {
 	cy.get('.btn-' + buttonType).click();
 };
 
-
 export const selectedShouldBe = (name) => {
 	cy.get('#selected-player').contains(name);
 };
-
 
 export const loginAs = (user) => {
 	// check that the auth form is visible
@@ -107,10 +128,7 @@ export const registerAs = (user) => {
 
 	cy.intercept('POST', '**/api/auth', userWithoutPassword).as('auth');
 
-	const { sendResponse } = interceptIndefinitely(
-		"**/api/players",
-		[]
-	);
+	const { sendResponse } = interceptIndefinitely('**/api/players', []);
 
 	findAndClickButton('auth');
 
@@ -126,7 +144,6 @@ export const registerAs = (user) => {
 	});
 };
 
-
 export const checkPlayerInList = (playerIndex) => {
 	cy.get('#players-list').should('contain', players[playerIndex].name);
-}
+};
