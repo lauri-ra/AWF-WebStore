@@ -1,51 +1,45 @@
-# players-crud2
+<!-- @format -->
 
-This template should help get you started developing with Vue 3 in Vite.
+# Instructions
 
-## Recommended IDE Setup
+## Starting server backend
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+The backend for all the exercises is located inside the the directory `backend`
+at the root of the repository.
 
-## Customize configuration
+1. Setup/install backend
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+   - **this stage needs to be performed only once**
+   - **you can skip this stage if the backend is already installed**
+   - change working directory to `backend`
+   - inside `backend` directory run `npm install`
 
-## Project Setup
+2. Starting the backend server
 
-```sh
-npm install
-```
+   - change working directory to `backend`
+   - inside `backend` directory run `npm run vue-crud2`
+   - server listens on http://localhost:3001/
 
-### Compile and Hot-Reload for Development
+3. Stopping the backend server
+   - press <`Ctrl-C`> while the server is running
 
-```sh
-npm run dev
-```
+### Resetting database back to its initial state
 
-### Compile and Minify for Production
+1. change working directory to `backend`
+2. inside `backend` directory run `npm run reset-db`
 
-```sh
-npm run build
-```
+## Setup the exercise
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+- change working directory to `vue/players_CRUD2`
+- run `npm install` to install all dependencies
 
-```sh
-npm run test:unit
-```
+## Run the exercise
 
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
+- run `npm run frontend` to run the frontend in port 5500 and run it in watch mode. You can change the port in the package.json file. (or open [index.html](./index.html) file in a browser to view the app)
 
-```sh
-npm run test:e2e:dev
-```
+## Test
 
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
-
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
-
-```sh
-npm run build
-npm run test:e2e
-```
+- run `npm run test:unit -- --run` to run the unit tests in non-watch mode.
+- run `npm run test:unit` to run the unit tests in watch mode
+- run `npm run test:e2e:dev` to run the end to end tests in interactive watch mode.
+- run `npm run test:e2e` to run the end to end tests once in a non-interactive mode.
