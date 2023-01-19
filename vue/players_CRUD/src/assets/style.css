@@ -1,0 +1,156 @@
+
+
+:root {
+
+  --color-standard-white: white;
+  --color-standard-white-soft: #f8f8f8;
+  --color-standard-white-mute: #f2f2f2;
+
+  --color-standard-grey: #636363;
+
+  --color-standard-black: #181818;
+  --color-standard-black-soft: #222222;
+  --color-standard-black-mute: #282828;
+
+  --color-standard-basic: #42b883;
+  --color-standard-light: #42d392;
+  --color-standard-lighter: #35eb9a;
+  --color-standard-dark: #33a06f;
+  --color-standard-darker: #155f3e;
+
+  --color-special-basic: #ffc517;
+  --color-special-light: #fcd253;
+  --color-special-lighter: #fcfc7c;
+  --color-special-dark: #e0ad15;
+  --color-special-darker: #ad850e;
+  --color-special-dimm-1: rgba(255, 197, 23, 0.5);
+
+  --color-divider-light-1: rgba(60, 60, 60, 0.29);
+  --color-divider-light-2: rgba(60, 60, 60, 0.12);
+  --color-divider-dark-1: rgba(84, 84, 84, 0.65);
+  --color-divider-dark-2: rgba(84, 84, 84, 0.48);
+
+  --color-text-light-1: #2c3e50; 
+  --color-text-light-2: rgba(60, 60, 60, 0.66);
+  --color-text-light-3: rgba(60, 60, 60, 0.207);
+  --color-text-dark-1: var(--color-standard-white);
+  --color-text-dark-2: rgba(235, 235, 235, 0.64);
+  --color-text-dark-3: rgba(235, 235, 235, 0.207);
+
+  --color-text-warning: #b84242;
+
+  --color-warning: #b84242;
+  --color-warning-light: #d55e5e;
+  --color-warning-lighter: #e97a7a;
+  --color-warning-darker: #8f2d2d;
+  
+
+  --size-bezel: .5rem;
+  --size-radius: 4px;
+  --main-margin: 5px;
+  line-height: 1.4;
+  
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+  Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-size: calc(.6rem + .4vw);
+  padding: 0 calc(var(--size-bezel) * 3);
+}
+
+/* semantic color variables for this project */
+:root {
+  /* --color-background: var(--color-standard-white); */
+  --color-background: var(--color-standard-white);
+  --color-background-soft: var(--color-standard-white-soft);
+  --color-background-mute: var(--color-standard-white-mute);
+
+  --color-border: var(--color-divider-light-2);
+  --color-border-hover: var(--color-divider-light-1);
+  
+  --color-heading: var(--color-text-light-1);
+  --color-text: var(--color-text-light-1);
+  --color-text-mute: var(--color-text-light-2);
+  --color-accent: var(--color-text-light-2);
+
+  --color-button-add: var(--color-standard-light);
+  --color-button-add-hover: var(--color-standard-lighter);
+
+  --color-text-button-delete: var(--color-text-light-1);
+  --color-button-delete: var(--color-warning-light);
+  --color-button-delete-hover: var(--color-warning-lighter);
+
+  --color-checkmark: var(--color-background-mute);
+  --color-checkmark-checked-bg: var(--color-standard-basic);
+  --color-checkmark-checked-sign: var(--color-standard-white);
+  --color-checkmark-hover-bg: var(--color-standard-grey);
+  --color-checkmark-unchecked-bg: var(--color-standard-white);
+
+  --color-button-update: var(--color-button-add);
+  --color-button-update-hover: var(--color-button-add-hover);
+  --color-text-button-update: var(--color-text-button-add);
+  --color-button-update-inactive: var(--color-standard-grey);
+  --color-text-button-update-inactive: var(--color-text-light-1);
+
+  /* --section-gap: 160px; */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: var(--color-standard-black);
+    --color-background-soft: var(--color-standard-black-soft);
+    --color-background-mute: var(--color-standard-black-mute);
+
+    --color-border: var(--color-divider-dark-2);
+    --color-border-hover: var(--color-divider-dark-1);
+
+    --color-heading: var(--color-text-dark-1);
+    --color-text: var(--color-text-dark-2);
+    --color-text-mute: var(--color-text-dark-3);
+    --color-accent: var(--color-text-dark-2);
+    
+    --color-text-button-add: var(--color-text-dark-1);
+    --color-button-add: var(--color-standard-dark);
+    --color-button-add-hover: var(--color-standard-darker);
+
+    --color-text-button-delete: var(--color-text-dark-1);
+    --color-button-delete: var(--color-warning);
+    --color-button-delete-hover: var(--color-warning-darker);
+
+  }
+}
+
+body {
+  min-height: 100vh;
+  color: var(--color-text);
+  background: var(--color-background);
+  transition: color 0.5s, background-color 0.5s;
+  line-height: 1.6;
+  font-size: 15px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.vue-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /* font-size: large; */
+  color: var(--color-heading);
+}
+
+.img-inline::before {
+  content:'';
+  background-image:url(./logo.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  width: 50px;
+  height: 40px;
+  display: block;
+}
+
+#exerciseNumber {
+  color: var(--color-standard-basic);
+  font-weight: 1000;
+}
