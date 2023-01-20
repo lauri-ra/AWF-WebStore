@@ -16,27 +16,25 @@ export function interceptIndefinitely(requestMatcher, response) {
 	// Intercept requests to the URL we are loading data from and do not let the response occur until our above Promise is resolved
 	cy.intercept(requestMatcher, (request) => {
 		return trigger.then(() => {
-			// Request should contain headers with authorization information
-			if (requestMatcher != '**/api/users') {
-				if (!request.headers.authorization)
-					request.reply({ statusCode: 401, body: 'Unauthorized' });
+			if (requestMatcher == '**/api/users') request.reply(response);
 
-				if (!request.headers.authorization.includes('Basic'))
-					request.reply({ statusCode: 401, body: 'Unauthorized' });
+			// Other Requests should contain headers with authorization information
+			if (!request.headers.authorization)
+				request.reply({ statusCode: 401, body: 'Unauthorized' });
 
-				const authHeader = request.headers.authorization.split(' ')[1];
-				const decodedAuthHeader = atob(authHeader);
-				const [username, password] = decodedAuthHeader.split(':');
-				if (
-					username === expectedUser.username &&
-					password === expectedUser.password
-				) {
-					request.reply(response);
-				} else {
-					request.reply({ statusCode: 401, body: 'Wrong user details' });
-				}
-			} else {
+			if (!request.headers.authorization.includes('Basic '))
+				request.reply({ statusCode: 401, body: 'Unauthorized' });
+
+			const authHeader = request.headers.authorization.split(' ')[1];
+			const decodedAuthHeader = atob(authHeader);
+			const [username, password] = decodedAuthHeader.split(':');
+			if (
+				username === expectedUser.username &&
+				password === expectedUser.password
+			) {
 				request.reply(response);
+			} else {
+				request.reply({ statusCode: 403, body: 'Wrong user details' });
 			}
 		});
 	});
