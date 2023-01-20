@@ -16,14 +16,14 @@ export function interceptIndefinitely(requestMatcher, response) {
 	// Intercept requests to the URL we are loading data from and do not let the response occur until our above Promise is resolved
 	cy.intercept(requestMatcher, (request) => {
 		return trigger.then(() => {
-			if (requestMatcher == '**/api/users') request.reply(response);
+			if (requestMatcher == '**/api/users') return request.reply(response);
 
 			// Other Requests should contain headers with authorization information
 			if (!request.headers.authorization)
-				request.reply({ statusCode: 401, body: 'Unauthorized' });
+				return request.reply({ statusCode: 401, body: 'Unauthorized' });
 
-			if (!request.headers.authorization.includes('Basic '))
-				request.reply({ statusCode: 401, body: 'Unauthorized' });
+			if (!request.headers.authorization.startsWith('Basic '))
+				return request.reply({ statusCode: 401, body: 'Unauthorized' });
 
 			const authHeader = request.headers.authorization.split(' ')[1];
 			const decodedAuthHeader = atob(authHeader);
@@ -32,9 +32,9 @@ export function interceptIndefinitely(requestMatcher, response) {
 				username === expectedUser.username &&
 				password === expectedUser.password
 			) {
-				request.reply(response);
+				return request.reply(response);
 			} else {
-				request.reply({ statusCode: 403, body: 'Wrong user details' });
+				return request.reply({ statusCode: 403, body: 'Wrong user details' });
 			}
 		});
 	});
