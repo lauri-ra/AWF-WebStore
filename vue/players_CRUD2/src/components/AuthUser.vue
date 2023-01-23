@@ -2,7 +2,7 @@
   Student instructions to create this component:
 
   The functionality of this component is two fold: 
-  1. Display a link that toggles between "Go to login", "Go to register", and "Logout" depending on the value of the isLoggedIn prop:
+  1. Display a link that toggles between "Go to login", "Go to register", and "Logout" depending on the value of the isLoggedIn prop: By default, it is "Go to register", when the user is not logged in.  
   - User logged in: display "Logout". The link should emit a logout event when clicked.
   - User not logged in and in login: display "Go to register". 
   - User not logged in and in register: display "Go to login".
