@@ -20,8 +20,8 @@
 
 <template>
 	<div>
-		<h3>Selected Player</h3>
 		<div v-if="player">
+			<h3>Selected Player</h3>
 			<div id="selected-player">
 				<div>{{ player.name }}</div>
 				<div id="player-status">
