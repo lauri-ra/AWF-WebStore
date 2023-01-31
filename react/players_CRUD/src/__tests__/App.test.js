@@ -27,7 +27,7 @@ test('should fetch players from backend when first loaded', async () => {
 
 test('should show error status when loading players fails', async () => {
 	server.use(
-		rest.get(/\/api\/players$/, (req, res, ctx) =>
+		rest.get('**/api/players', (req, res, ctx) =>
 			res(ctx.networkError('Network error'))
 		)
 	);
@@ -90,7 +90,7 @@ test('should send POST request to backend and add new player to "#players-list"'
 
 test('should show error status and not add new player if POST request fails', async () => {
 	server.use(
-		rest.post(/\/api\/players$/, (req, res, ctx) =>
+		rest.post('**/api/players', (req, res, ctx) =>
 			res(ctx.networkError('Network error'))
 		)
 	);

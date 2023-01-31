@@ -25,9 +25,9 @@ test('should fetch players from backend when first loaded', async () => {
 
 test('should show error status when loading players fails', async () => {
 	server.use(
-		rest.get(/\/api\/players$/, (req, res, ctx) =>
-			res(ctx.networkError('Network error'))
-		)
+		rest.get('**/api/players', (req, res, ctx) => {
+			return res(ctx.networkError('Network error'));
+		})
 	);
 
 	render(<App />);

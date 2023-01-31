@@ -101,9 +101,9 @@ const updatePlayer = (req, res, ctx) => {
 };
 
 export const handlers = [
-	rest.get(/\/api\/players$/, getAllPlayers),
+	rest.get('**/api/players', getAllPlayers),
 	rest.get('**/api/players/:playerId', getOnePlayer),
 	rest.delete('**/api/players/:playerId', deleteOnePlayer),
-	rest.post(/\/api\/players$/, addNewPlayer),
+	rest.post('**/api/players', addNewPlayer),
 	rest.put('**/api/players/:playerId', updatePlayer),
 ];
