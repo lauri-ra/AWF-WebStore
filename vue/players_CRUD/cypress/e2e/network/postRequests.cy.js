@@ -26,7 +26,8 @@ describe('Requests: POST', () => {
 				cy.get('#input-player').should('have.value', newPlayer.name);
 
 				const postPlayer = interceptIndefinitely(playersUrl, {
-					...newPlayer,
+					body: { ...newPlayer },
+					statusCode: 201,
 				});
 				findAndClickButton('add');
 				cy.get('#input-player').should('have.value', '');

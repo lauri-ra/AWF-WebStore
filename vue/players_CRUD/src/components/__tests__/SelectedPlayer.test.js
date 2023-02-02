@@ -5,9 +5,10 @@ import SelectedPlayer from '../SelectedPlayer.vue';
 import { describe, it, expect, beforeEach } from 'vitest';
 
 describe('SelectedPlayer', () => {
-	const player = { id: 1, name: 'Test Player', isActive: true };
+	let player;
 	let wrapper;
 	beforeEach(async () => {
+		player = { id: 1, name: 'Test Player', isActive: true };
 		wrapper = mount(SelectedPlayer, { props: { player: null } });
 		await wrapper.setProps({ player });
 	});
