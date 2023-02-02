@@ -42,7 +42,12 @@ function App() {
 		setStatus(REQ_STATUS.loading);
 		const fetchData = async () => {
 			try {
-				const res = await fetch('http://localhost:3001/api/players');
+				const res = await fetch('http://localhost:3001/api/players', {
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json',
+					},
+				});
 				const data = await res.json();
 				setPlayers(data);
 				setStatus(REQ_STATUS.success);
@@ -56,7 +61,12 @@ function App() {
 	const fetchPlayer = async (id) => {
 		setStatus(REQ_STATUS.loading);
 		try {
-			const res = await fetch(`http://localhost:3001/api/players/${id}`);
+			const res = await fetch(`http://localhost:3001/api/players/${id}`, {
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+				},
+			});
 			const player = await res.json();
 			setSelectedPlayer(player);
 			setStatus(REQ_STATUS.success);
