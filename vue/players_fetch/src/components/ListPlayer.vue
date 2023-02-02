@@ -11,13 +11,18 @@
 
 <template>
 	<li v-bind:id="playerObj - { id }">
-		<a href="#" @click="getPlayer(playerObj.id)">{{ playerObj.name }}</a>
+		<a href="#" @click="emitPlayerClickedEvent(playerObj.id)">{{ playerObj.name }}</a>
 	</li>
 </template>
 
 <script>
 export default {
-	props: ['playerObj', 'getPlayer'],
+	props: ['playerObj'],
+	methods: {
+		emitPlayerClickedEvent(id) {
+			this.$emit('player-clicked', id);
+		},
+	},
 };
 </script>
 

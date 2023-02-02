@@ -19,7 +19,7 @@
 		TODO: ListPlayers
 		<ul id="players-list" v-for="player in players">
 			<!-- <li v-for="player in players" :key="player.id">{{ player.name }}</li> -->
-			<ListPlayer :playerObj="player" :getPlayer="getPlayer" />
+			<ListPlayer :playerObj="player" @player-clicked="playerClicked" />
 		</ul>
 	</div>
 </template>
@@ -38,6 +38,11 @@ export default {
 		ListPlayer,
 	},
 	props: ['getPlayer'],
+	methods: {
+		playerClicked(id) {
+			this.getPlayer(id);
+		},
+	},
 };
 </script>
 
