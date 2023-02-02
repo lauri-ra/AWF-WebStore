@@ -16,17 +16,15 @@
 export const SelectedPlayer = ({ player }) => {
 	return (
 		<div>
-			{player && (
+			{player ? (
 				<div>
 					<h3>Selected Player</h3>
 					<div id='selected-player'>
 						<div id='player-name'>{player.name}</div>
-						<div id='player-status'>
-							{player.isActive ? <div>active</div> : <div>inactive</div>}
-						</div>
+						<div id='player-status'>{player.isActive ? 'active' : 'inactive'}</div>
 					</div>
 				</div>
-			)}
+			) : null}
 		</div>
 	);
 };
