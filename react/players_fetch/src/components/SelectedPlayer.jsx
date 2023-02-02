@@ -20,8 +20,10 @@ export const SelectedPlayer = ({ player }) => {
 				<div>
 					<h3>Selected Player</h3>
 					<div id='selected-player'>
-						<div>{player.name}</div>
-						{player.isActive ? <div>active</div> : <div>inactive</div>}
+						<div id='player-name'>{player.name}</div>
+						<div id='player-status'>
+							{player.isActive ? <div>active</div> : <div>inactive</div>}
+						</div>
 					</div>
 				</div>
 			)}
