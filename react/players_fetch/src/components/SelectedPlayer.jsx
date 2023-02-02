@@ -8,7 +8,7 @@
  * REMEMBER: use the same ids, classes and attributes as in the Vue exercise
  * in the same places to pass the tests. Text content should be the same as in
  * the Vue exercise.
- * 
+ *
  * Use react conditional rendering to display the selected player only if the
  * "player" prop is not null or undefined.
  */
@@ -16,8 +16,15 @@
 export const SelectedPlayer = ({ player }) => {
 	return (
 		<div>
-			<h3>Selected Player</h3>
-			TODO: SelectedPlayer
+			{player && (
+				<div>
+					<h3>Selected Player</h3>
+					<div id='selected-player'>
+						<div>{player.name}</div>
+						{player.isActive ? <div>active</div> : <div>inactive</div>}
+					</div>
+				</div>
+			)}
 		</div>
 	);
 };

@@ -1,4 +1,4 @@
-/** 
+/**
  * Student instructions:
  *
  * Use the provided components to create a React app that fetches players from
@@ -25,6 +25,7 @@
 import { ListPlayers } from './components/ListPlayers.jsx';
 import { SelectedPlayer } from './components/SelectedPlayer.jsx';
 import { RequestStatus } from './components/RequestStatus.jsx';
+import { useEffect, useState } from 'react';
 
 const REQ_STATUS = {
 	loading: 'Loading...',
@@ -33,11 +34,42 @@ const REQ_STATUS = {
 };
 
 function App() {
+	const [players, setPlayers] = useState(null);
+	const [selectedPlayer, setSelectedPlayer] = useState(null);
+	const [status, setStatus] = useState(null);
+
+	useEffect(() => {
+		setStatus(REQ_STATUS.loading);
+		const fetchData = async () => {
+			try {
+				const res = await fetch('http://localhost:3001/api/players');
+				const data = await res.json();
+				setPlayers(data);
+				setStatus(REQ_STATUS.success);
+			} catch (error) {
+				setStatus(REQ_STATUS.error);
+			}
+		};
+		fetchData();
+	}, []);
+
+	const fetchPlayer = async (id) => {
+		setStatus(REQ_STATUS.loading);
+		try {
+			const res = await fetch(`http://localhost:3001/api/players/${id}`);
+			const player = await res.json();
+			setSelectedPlayer(player);
+			setStatus(REQ_STATUS.success);
+		} catch (error) {
+			setStatus(REQ_STATUS.error);
+		}
+	};
+
 	return (
 		<>
-			<RequestStatus />
-			<ListPlayers />
-			<SelectedPlayer />
+			<RequestStatus status={status} />
+			<ListPlayers players={players} selectPlayer={fetchPlayer} />
+			<SelectedPlayer player={selectedPlayer} />
 		</>
 	);
 }
