@@ -8,13 +8,6 @@ const getAllPlayers = (req, res, ctx) => {
 		return res(ctx.status(401));
 	}
 
-	if (
-		!req.headers.has('Accept') ||
-		!req.headers.get('Accept').includes('json')
-	) {
-		return res(ctx.status(406));
-	}
-
 	return res(
 		ctx.json(players.map((player) => ({ id: player.id, name: player.name })))
 	);
@@ -23,13 +16,6 @@ const getAllPlayers = (req, res, ctx) => {
 const getOnePlayer = (req, res, ctx) => {
 	if (!req.headers.has('Authorization')) {
 		return res(ctx.status(401));
-	}
-
-	if (
-		!req.headers.has('Accept') ||
-		!req.headers.get('Accept').includes('json')
-	) {
-		return res(ctx.status(406));
 	}
 
 	const { playerId } = req.params;
@@ -50,13 +36,6 @@ const deleteOnePlayer = (req, res, ctx) => {
 		return res(ctx.status(401));
 	}
 
-	if (
-		!req.headers.has('Accept') ||
-		!req.headers.get('Accept').includes('json')
-	) {
-		return res(ctx.status(406));
-	}
-
 	const { playerId } = req.params;
 	if (/\D/.test(playerId)) {
 		return res(ctx.status(404));
@@ -75,13 +54,6 @@ const addNewPlayer = (req, res, ctx) => {
 		return res(ctx.status(401));
 	}
 
-	if (
-		!req.headers.has('Accept') ||
-		!req.headers.get('Accept').includes('json')
-	) {
-		return res(ctx.status(406));
-	}
-
 	return res(
 		ctx.status(201),
 		ctx.json({
@@ -95,13 +67,6 @@ const addNewPlayer = (req, res, ctx) => {
 const updatePlayer = (req, res, ctx) => {
 	if (!req.headers.has('Authorization')) {
 		return res(ctx.status(401));
-	}
-
-	if (
-		!req.headers.has('Accept') ||
-		!req.headers.get('Accept').includes('json')
-	) {
-		return res(ctx.status(406));
 	}
 
 	const { playerId } = req.params;
@@ -121,13 +86,6 @@ const updatePlayer = (req, res, ctx) => {
 };
 
 const registerUser = (req, res, ctx) => {
-	if (
-		!req.headers.has('Accept') ||
-		!req.headers.get('Accept').includes('json')
-	) {
-		return res(ctx.status(406));
-	}
-
 	if (!req.body?.username) {
 		return res(
 			ctx.status(400),

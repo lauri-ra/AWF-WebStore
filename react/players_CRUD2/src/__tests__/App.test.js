@@ -14,16 +14,16 @@ import { rest, server } from '../mocks/server';
 /* eslint-disable testing-library/no-container */
 /* eslint-disable testing-library/no-node-access */
 
-const fillLoginFormWith = async (username, password) => {
-	const usernameInput = await screen.findByLabelText(/username/i);
+const fillLoginFormWith = async (username, password, container) => {
+	const usernameInput = await screen.findByRole('textbox', { name: /username/i });
 	await UserEvent.type(usernameInput, username, { delay: 10 });
-	const passwordInput = await screen.findByLabelText(/password/i);
+	const passwordInput = container.querySelector('input[type="password"][name="password"]');
 	await UserEvent.type(passwordInput, password, { delay: 10 });
 };
 
 test('should fetch all players from backend after successful login', async () => {
 	const { container } = render(<App />);
-	await fillLoginFormWith('username', 'password');
+	await fillLoginFormWith('username', 'password', container);
 	const authForm = container.querySelector('#auth-form');
 	fireEvent.submit(authForm);
 
@@ -39,7 +39,7 @@ test('should fetch all players from backend after successful login', async () =>
 
 test('should show logout link after login', async () => {
 	const { container } = render(<App />);
-	await fillLoginFormWith('username', 'password');
+	await fillLoginFormWith('username', 'password', container);
 	const authForm = container.querySelector('#auth-form');
 	fireEvent.submit(authForm);
 
@@ -56,7 +56,7 @@ test('should show error status after failed login (incorrect credentials)', asyn
 	);
 
 	const { container } = render(<App />);
-	await fillLoginFormWith('username', 'password');
+	await fillLoginFormWith('username', 'password', container);
 
 	const authForm = container.querySelector('#auth-form');
 	fireEvent.submit(authForm);
@@ -68,7 +68,7 @@ test('should show error status after failed login (incorrect credentials)', asyn
 
 test('should remove players from DOM after logout', async () => {
 	const { container } = render(<App />);
-	await fillLoginFormWith('username', 'password');
+	await fillLoginFormWith('username', 'password', container);
 
 	const authForm = container.querySelector('#auth-form');
 	fireEvent.submit(authForm);
@@ -86,7 +86,7 @@ test('should show logout link after successful registration', async () => {
 	const registrationLink = screen.getByRole('link', { text: /register/i });
 	await UserEvent.click(registrationLink);
 
-	await fillLoginFormWith('username', 'password');
+	await fillLoginFormWith('username', 'password', container);
 
 	const authForm = container.querySelector('#auth-form');
 	fireEvent.submit(authForm);
@@ -101,7 +101,7 @@ test('should fetch all players from backend after successful registration', asyn
 	const registrationLink = screen.getByRole('link', { text: /register/i });
 	await UserEvent.click(registrationLink);
 
-	await fillLoginFormWith('username', 'password');
+	await fillLoginFormWith('username', 'password', container);
 
 	const authForm = container.querySelector('#auth-form');
 	fireEvent.submit(authForm);
@@ -130,7 +130,7 @@ test('should show error status after failed registration (invalid credentials)',
 	const registrationLink = screen.getByRole('link', { text: /register/i });
 	await UserEvent.click(registrationLink);
 
-	await fillLoginFormWith('username', 'password');
+	await fillLoginFormWith('username', 'password', container);
 
 	const authForm = container.querySelector('#auth-form');
 	fireEvent.submit(authForm);
@@ -148,7 +148,7 @@ test('should show error status when loading players fails', async () => {
 	);
 
 	const { container } = render(<App />);
-	await fillLoginFormWith('username', 'password');
+	await fillLoginFormWith('username', 'password', container);
 
 	const authForm = container.querySelector('#auth-form');
 	fireEvent.submit(authForm);
@@ -160,7 +160,7 @@ test('should show error status when loading players fails', async () => {
 
 test('should fetch single player data from backend when link is clicked', async () => {
 	const { container } = render(<App />);
-	await fillLoginFormWith('username', 'password');
+	await fillLoginFormWith('username', 'password', container);
 
 	const authForm = container.querySelector('#auth-form');
 	fireEvent.submit(authForm);
@@ -188,8 +188,7 @@ test('should show error status when clicking link and loading player data fails'
 	);
 
 	const { container } = render(<App />);
-
-	await fillLoginFormWith('username', 'password');
+	await fillLoginFormWith('username', 'password', container);
 
 	const authForm = container.querySelector('#auth-form');
 	fireEvent.submit(authForm);
@@ -207,7 +206,7 @@ test('should show error status when clicking link and loading player data fails'
 test('should send POST request to backend and add new player to "#players-list"', async () => {
 	const { container } = render(<App />);
 
-	await fillLoginFormWith('username', 'password');
+	await fillLoginFormWith('username', 'password', container);
 	const authForm = container.querySelector('#auth-form');
 	fireEvent.submit(authForm);
 
@@ -233,7 +232,7 @@ test('should show error status and not add new player if POST request fails', as
 	);
 
 	const { container } = render(<App />);
-	await fillLoginFormWith('username', 'password');
+	await fillLoginFormWith('username', 'password', container);
 
 	const authForm = container.querySelector('#auth-form');
 	fireEvent.submit(authForm);
@@ -254,7 +253,7 @@ test('should show error status and not add new player if POST request fails', as
 
 test('should send DELETE request to backend and delete player when "Delete" button is clicked', async () => {
 	const { container } = render(<App />);
-	await fillLoginFormWith('username', 'password');
+	await fillLoginFormWith('username', 'password', container);
 
 	const authForm = container.querySelector('#auth-form');
 	fireEvent.submit(authForm);
@@ -279,7 +278,7 @@ test('should show error status and not delete player if DELETE request fails', a
 		)
 	);
 	const { container } = render(<App />);
-	await fillLoginFormWith('username', 'password');
+	await fillLoginFormWith('username', 'password', container);
 
 	const authForm = container.querySelector('#auth-form');
 	fireEvent.submit(authForm);
@@ -298,7 +297,7 @@ test('should show error status and not delete player if DELETE request fails', a
 
 test('should send PUT request to backend and update player when "Update" button is clicked', async () => {
 	const { container } = render(<App />);
-	await fillLoginFormWith('username', 'password');
+	await fillLoginFormWith('username', 'password', container);
 
 	const authForm = container.querySelector('#auth-form');
 	fireEvent.submit(authForm);
@@ -367,7 +366,7 @@ test('should show error status and not update player if PUT request fails', asyn
 	);
 
 	const { container } = render(<App />);
-	await fillLoginFormWith('username', 'password');
+	await fillLoginFormWith('username', 'password', container);
 
 	const authForm = container.querySelector('#auth-form');
 	fireEvent.submit(authForm);
