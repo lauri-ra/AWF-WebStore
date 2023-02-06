@@ -15,9 +15,9 @@ import { rest, server } from '../mocks/server';
 /* eslint-disable testing-library/no-node-access */
 
 const fillLoginFormWith = async (username, password, container) => {
-	const usernameInput = await screen.findByRole('textbox', { name: /username/i });
+	const usernameInput = container.querySelector('input[type="text"][name~="username"]');
 	await UserEvent.type(usernameInput, username, { delay: 10 });
-	const passwordInput = container.querySelector('input[type="password"][name="password"]');
+	const passwordInput = container.querySelector('input[type="password"][name~="password"]');
 	await UserEvent.type(passwordInput, password, { delay: 10 });
 };
 
