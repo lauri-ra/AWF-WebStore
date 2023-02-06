@@ -11,11 +11,37 @@
  * the same places to pass the tests.
  */
 
+import { useState } from 'react';
+
 export const AddPlayer = ({ handleSubmit }) => {
+	const [playerName, setPlayerName] = useState('');
+
+	const addPlayer = (event) => {
+		event.preventDefault();
+
+		const playerObj = {
+			name: playerName,
+			isActive: false,
+		};
+
+		handleSubmit(playerObj);
+		setPlayerName('');
+	};
+
 	return (
 		<div>
 			<h3>Add Player</h3>
-			TODO: AddPlayer
+			<form id='submit-player' onSubmit={addPlayer}>
+				<input
+					id='input-player'
+					placeholder='Enter player name'
+					value={playerName}
+					onChange={({ target }) => setPlayerName(target.value)}
+				/>
+				<button className='btn-add' type='submit'>
+					Add player
+				</button>
+			</form>
 		</div>
 	);
 };

@@ -23,9 +23,10 @@
  */
 
 import { ListPlayers } from './components/ListPlayers.jsx';
-import { AddPlayer } from './components/AddPlayer';
-import { RequestStatus } from './components/RequestStatus';
 import { SelectedPlayer } from './components/SelectedPlayer.jsx';
+import { RequestStatus } from './components/RequestStatus.jsx';
+import { useEffect, useState } from 'react';
+import { AddPlayer } from './components/AddPlayer.jsx';
 
 const REQ_STATUS = {
 	loading: 'Loading...',
@@ -34,12 +35,94 @@ const REQ_STATUS = {
 };
 
 function App() {
+	const [players, setPlayers] = useState([]);
+	const [selectedPlayer, setSelectedPlayer] = useState(null);
+	const [status, setStatus] = useState(null);
+
+	const fetchData = async () => {
+		try {
+			const res = await fetch('http://localhost:3001/api/players', {
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+				},
+			});
+			const data = await res.json();
+			setPlayers(data);
+			setStatus(REQ_STATUS.success);
+		} catch (error) {
+			setStatus(REQ_STATUS.error);
+		}
+	};
+
+	useEffect(() => {
+		setStatus(REQ_STATUS.loading);
+		fetchData();
+	}, []);
+
+	const fetchPlayer = async (id) => {
+		setStatus(REQ_STATUS.loading);
+		try {
+			const res = await fetch(`http://localhost:3001/api/players/${id}`, {
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+				},
+			});
+			const player = await res.json();
+			setSelectedPlayer(player);
+			setStatus(REQ_STATUS.success);
+		} catch (error) {
+			setStatus(REQ_STATUS.error);
+		}
+	};
+
+	const addPlayer = async (player) => {
+		await fetch('http://localhost:3001/api/players', {
+			method: 'post',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(player),
+		});
+
+		fetchData();
+	};
+
+	const removePlayer = async (id) => {
+		await fetch(`http://localhost:3001/api/players/${id}`, {
+			method: 'delete',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+		});
+
+		fetchData();
+		setSelectedPlayer(null);
+	};
+
+	const updatePlayer = async (id, status) => {
+		await fetch(`http://localhost:3001/api/players/${id}`, {
+			method: 'put',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ status }),
+		});
+	};
 	return (
 		<>
-			<RequestStatus />
-			<AddPlayer />
-			<ListPlayers />
-			<SelectedPlayer />
+			<RequestStatus status={status} />
+			<AddPlayer handleSubmit={addPlayer} />
+			<ListPlayers players={players} selectPlayer={fetchPlayer} />
+			<SelectedPlayer
+				player={selectedPlayer}
+				removePlayer={removePlayer}
+				updatePlayer={updatePlayer}
+			/>
 		</>
 	);
 }
