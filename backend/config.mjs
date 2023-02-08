@@ -14,6 +14,7 @@ export const getConfig = (exercise = null) => {
       };
     case 'react-fetch':
     case 'react-crud':
+    case 'react-redux':
     case 'redux-thunk':
     case 'vue-crud':
     case 'vue-fetch':
