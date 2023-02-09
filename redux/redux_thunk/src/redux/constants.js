@@ -3,7 +3,7 @@
 // Exercise redux constants
 
 // types that concern statusReducer
-export const SET_STATUS = 'SET_STATUS';
+export const SET_REQUEST_STATUS = 'SET_REQUEST_STATUS';
 export const LOADING = 'LOADING';
 export const READY = 'READY';
 export const ERROR = 'ERROR';
