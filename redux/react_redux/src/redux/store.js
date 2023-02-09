@@ -39,4 +39,4 @@ export const reducers = combineReducers({
  * @see https://redux.js.org/api/compose
  * @see https://redux.js.org/api/applymiddleware
  */
-export default legacy_createStore(reducers, composeWithDevTools);
+export default legacy_createStore(reducers, composeWithDevTools());
