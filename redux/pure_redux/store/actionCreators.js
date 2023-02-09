@@ -28,7 +28,7 @@ import * as actions from './actionTypes.js';
  * @param {object} player new player object
  * @returns {object} action object for adding a new player
  */
-export const addPlayer = (name, isActive = false) => {};
+export const addPlayer = (player) => {};
 
 /**
  * Get the action object used to dispatch the action for removing a player
