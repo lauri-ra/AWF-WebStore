@@ -40,8 +40,6 @@ The backend for all the exercises is located inside the directory `backend` at t
 - In another terminal inside the exercise directory run `npm start` to run the app in the development mode. Open [http://localhost:3000](http://localhost:3000)
   to view it in your browser.
 
-**NOTE: Inside _package.json_ there is a proxy setting (`"proxy": "http://localhost:3001"`) which allows you to call the backend directly without the host and port. For example, you can replace `http://localhost:3001/api/players` with `/api/players` omitting the host and port. If this proxy causes issues, refer to the teams-channel.**
-
 ## Testing the exercise
 
 ### `npm test`
