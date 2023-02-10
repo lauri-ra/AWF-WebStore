@@ -14,6 +14,7 @@
     "react-crud": "nodemon index.mjs react-crud",
     "react-crud2": "nodemon index.mjs react-crud2",
     "react-fetch": "nodemon index.mjs react-fetch",
+    "react-redux": "nodemon index.mjs react-redux",
     "redux-thunk": "nodemon index.mjs redux-thunk",
     "vue-crud": "nodemon index.mjs vue-crud",
     "vue-crud2": "nodemon index.mjs vue-crud2",
