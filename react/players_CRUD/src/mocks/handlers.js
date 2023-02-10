@@ -4,26 +4,12 @@ import { rest } from 'msw';
 import { players } from './players';
 
 const getAllPlayers = (req, res, ctx) => {
-	if (
-		!req.headers.has('Accept') ||
-		!req.headers.get('Accept').includes('json')
-	) {
-		return res(ctx.status(406));
-	}
-
 	return res(
 		ctx.json(players.map((player) => ({ id: player.id, name: player.name })))
 	);
 };
 
 const getOnePlayer = (req, res, ctx) => {
-	if (
-		!req.headers.has('Accept') ||
-		!req.headers.get('Accept').includes('json')
-	) {
-		return res(ctx.status(406));
-	}
-
 	const { playerId } = req.params;
 	if (/\D/.test(playerId)) {
 		return res(ctx.status(404));
@@ -38,13 +24,6 @@ const getOnePlayer = (req, res, ctx) => {
 };
 
 const deleteOnePlayer = (req, res, ctx) => {
-	if (
-		!req.headers.has('Accept') ||
-		!req.headers.get('Accept').includes('json')
-	) {
-		return res(ctx.status(406));
-	}
-
 	const { playerId } = req.params;
 	if (/\D/.test(playerId)) {
 		return res(ctx.status(404));
@@ -59,13 +38,6 @@ const deleteOnePlayer = (req, res, ctx) => {
 };
 
 const addNewPlayer = (req, res, ctx) => {
-	if (
-		!req.headers.has('Accept') ||
-		!req.headers.get('Accept').includes('json')
-	) {
-		return res(ctx.status(406));
-	}
-
 	return res(
 		ctx.status(201),
 		ctx.json({
@@ -77,13 +49,6 @@ const addNewPlayer = (req, res, ctx) => {
 };
 
 const updatePlayer = (req, res, ctx) => {
-	if (
-		!req.headers.has('Accept') ||
-		!req.headers.get('Accept').includes('json')
-	) {
-		return res(ctx.status(406));
-	}
-
 	const { playerId } = req.params;
 	if (/\D/.test(playerId)) {
 		return res(ctx.status(404));

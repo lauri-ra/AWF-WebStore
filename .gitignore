@@ -3,3 +3,6 @@ node_modules
 elm/**/package-lock.json
 elm/**/index.js
 .DS_Store
+__snapshots__
+test-results.json
+test-report.html
