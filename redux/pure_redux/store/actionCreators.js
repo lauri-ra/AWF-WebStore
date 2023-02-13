@@ -28,7 +28,15 @@ import * as actions from './actionTypes.js';
  * @param {object} player new player object
  * @returns {object} action object for adding a new player
  */
-export const addPlayer = (player) => {};
+export const addPlayer = (player) => {
+	return {
+		type: actions.ADD_PLAYER,
+		payload: {
+			name: player.name,
+			isActive: player.isActive,
+		},
+	};
+};
 
 /**
  * Get the action object used to dispatch the action for removing a player
@@ -53,7 +61,14 @@ export const addPlayer = (player) => {};
  * @param {number} id player id (integer)
  * @returns {object} action object for removing a player
  */
-export const removePlayer = id => {};
+export const removePlayer = (id) => {
+	return {
+		type: actions.REMOVE_PLAYER,
+		payload: {
+			id: id,
+		},
+	};
+};
 
 /**
  * Get the action object used to dispatch the action for changing a player's status
@@ -78,4 +93,11 @@ export const removePlayer = id => {};
  * @param {number} id player id (integer)
  * @returns {object} action object for changing a player's status
  */
-export const togglePlayerStatus = id => {};
+export const togglePlayerStatus = (id) => {
+	return {
+		type: actions.TOGGLE_PLAYER_STATUS,
+		payload: {
+			id: id,
+		},
+	};
+};
