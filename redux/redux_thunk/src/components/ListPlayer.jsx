@@ -6,6 +6,16 @@
  * - getSelectedPlayer, found in src\redux\actionCreators\thunks\ListPlayer.jsx
  */
 
+import { useDispatch } from 'react-redux';
+import { getSelectedPlayer } from '../redux/actionCreators/thunks/ListPlayer';
+
 export const ListPlayer = ({ name, id }) => {
-	return 'TODO: ListPlayer';
+	const dispatch = useDispatch();
+	return (
+		<li id={`player-${id}`}>
+			<a href='/#' onClick={() => dispatch(getSelectedPlayer(id))}>
+				{name}
+			</a>
+		</li>
+	);
 };

@@ -12,4 +12,26 @@
  * @param {Number | String} id - id of the player
  * @return {Function} - thunk
  */
-export const getSelectedPlayer = (id) => {};
+
+import { setStatus } from '../statusActions';
+import { setSelectedPlayer } from '../selectedPlayerActions';
+import { REQ_STATUS } from '../../constants';
+
+export const getSelectedPlayer = (id) => {
+	return async (dispatch) => {
+		try {
+			dispatch(setStatus(REQ_STATUS.loading));
+			const res = await fetch(`http://localhost:3001/api/players/${id}`, {
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+				},
+			});
+			const player = await res.json();
+			dispatch(setStatus(REQ_STATUS.success));
+			dispatch(setSelectedPlayer(player));
+		} catch (error) {
+			dispatch(setStatus(REQ_STATUS.error));
+		}
+	};
+};

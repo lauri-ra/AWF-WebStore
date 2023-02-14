@@ -1,11 +1,6 @@
 /** @format REDUCERS*/
 
-import {
-	ADD_PLAYER,
-	REMOVE_PLAYER,
-	SET_PLAYERS,
-	UPDATE_PLAYER,
-} from '../constants';
+import { ADD_PLAYER, REMOVE_PLAYER, SET_PLAYERS, UPDATE_PLAYER } from '../constants';
 
 const defaultState = [];
 
@@ -21,7 +16,9 @@ const defaultState = [];
  * @returns {Array} - The players in an array.
  */
 const playersReducer = (state = defaultState, action) => {
-	switch (null) {
+	switch (action.type) {
+		case SET_PLAYERS:
+			return action.payload;
 		default:
 			return state;
 	}

@@ -7,11 +7,19 @@
  * - getPlayers, found in src\redux\actionCreators\thunks\ListPlayers.jsx
  */
 
+import { ListPlayer } from './ListPlayer';
+import { useSelector } from 'react-redux';
+
 export const ListPlayers = () => {
+	const players = useSelector((state) => state.players);
+
 	return (
 		<div>
 			<h2>List of players</h2>
-			TODO: ListPlayers
+			<ul id='players-list'>
+				{players &&
+					players.map((player) => <ListPlayer key={player.id} name={player.name} id={player.id} />)}
+			</ul>
 		</div>
 	);
 };
