@@ -43,22 +43,20 @@ function App() {
 	}, []);
 
 	const fetchPlayer = async (id) => {
-		batch(async () => {
+		try {
 			dispatch(setStatus(REQ_STATUS.loading));
-			try {
-				const res = await fetch(`http://localhost:3001/api/players/${id}`, {
-					headers: {
-						Accept: 'application/json',
-						'Content-Type': 'application/json',
-					},
-				});
-				const player = await res.json();
-				dispatch(setStatus(REQ_STATUS.success));
-				dispatch(setSelectedPlayer(player));
-			} catch (error) {
-				dispatch(setStatus(REQ_STATUS.error));
-			}
-		});
+			const res = await fetch(`http://localhost:3001/api/players/${id}`, {
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+				},
+			});
+			const player = await res.json();
+			dispatch(setStatus(REQ_STATUS.success));
+			dispatch(setSelectedPlayer(player));
+		} catch (error) {
+			dispatch(setStatus(REQ_STATUS.error));
+		}
 	};
 
 	return (

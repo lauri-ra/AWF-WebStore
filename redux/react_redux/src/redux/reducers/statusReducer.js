@@ -12,6 +12,7 @@ import { REQ_STATUS, SET_REQUEST_STATUS } from '../constants';
  * @param {*} action  - The action to be performed.
  * @returns  {String} - The status of the request
  */
+
 const statusReducer = (state = REQ_STATUS.loading, action) => {
 	switch (action.type) {
 		case SET_REQUEST_STATUS:
