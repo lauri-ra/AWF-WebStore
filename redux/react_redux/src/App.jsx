@@ -12,16 +12,62 @@
 import { ListPlayers } from './components/ListPlayers.jsx';
 import { SelectedPlayer } from './components/SelectedPlayer.jsx';
 import { RequestStatus } from './components/RequestStatus.jsx';
+import { useEffect } from 'react';
+import { batch, useDispatch } from 'react-redux';
 
+import { setPlayers } from './redux/actionCreators/playersActions.js';
+import { setSelectedPlayer } from './redux/actionCreators/selectedPlayerActions.js';
+import { setStatus } from './redux/actionCreators/statusActions.js';
+import { REQ_STATUS } from './redux/constants.js';
 
-function App () {
-  return (
-    <>
-      <RequestStatus />
-      <ListPlayers />
-      <SelectedPlayer />
-    </>
-  );
+function App() {
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const res = await fetch('http://localhost:3001/api/players', {
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json',
+					},
+				});
+				const data = await res.json();
+				dispatch(setPlayers(data));
+				dispatch(setStatus(REQ_STATUS.success));
+			} catch (error) {
+				dispatch(setStatus(REQ_STATUS.error));
+			}
+		};
+		fetchData();
+	}, []);
+
+	const fetchPlayer = async (id) => {
+		batch(async () => {
+			dispatch(setStatus(REQ_STATUS.loading));
+			try {
+				const res = await fetch(`http://localhost:3001/api/players/${id}`, {
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json',
+					},
+				});
+				const player = await res.json();
+				dispatch(setStatus(REQ_STATUS.success));
+				dispatch(setSelectedPlayer(player));
+			} catch (error) {
+				dispatch(setStatus(REQ_STATUS.error));
+			}
+		});
+	};
+
+	return (
+		<>
+			<RequestStatus />
+			<ListPlayers selectPlayer={fetchPlayer} />
+			<SelectedPlayer />
+		</>
+	);
 }
 
 export default App;
