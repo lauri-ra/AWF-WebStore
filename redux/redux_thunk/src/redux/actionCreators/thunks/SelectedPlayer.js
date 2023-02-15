@@ -15,7 +15,36 @@
  *
  * Hint: You have to get the required details of the selected player from the store.
  */
-export const deleteSelectedPlayer = () => {};
+
+import { setStatus } from '../statusActions';
+import { REQ_STATUS } from '../../constants';
+import { removePlayer, updatePlayer } from '../playersActions';
+import { clearSelectedPlayer } from '../selectedPlayerActions';
+
+export const deleteSelectedPlayer = (id) => {
+	return async (dispatch) => {
+		try {
+			dispatch(setStatus(REQ_STATUS.loading));
+			await fetch(`http://localhost:3001/api/players/${id}`, {
+				method: 'DELETE',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+				},
+			});
+
+			const playerToRemove = {
+				id: id,
+			};
+
+			dispatch(setStatus(REQ_STATUS.success));
+			dispatch(removePlayer(playerToRemove));
+			dispatch(clearSelectedPlayer());
+		} catch (error) {
+			dispatch(setStatus(REQ_STATUS.error));
+		}
+	};
+};
 
 /**
  * @description thunk for updating the selected player.
@@ -38,4 +67,27 @@ export const deleteSelectedPlayer = () => {};
  * Hint: You have to get required details of the selected player from the store.
  *
  */
-export const updateSelectedPlayer = (updatedActivity) => {};
+export const updateSelectedPlayer = (player) => {
+	return async (dispatch) => {
+		try {
+			dispatch(setStatus(REQ_STATUS.loading));
+
+			const response = await fetch(`http://localhost:3001/api/players/${player.id}`, {
+				method: 'PUT',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ isActive: !player.isActive }),
+			});
+
+			const updatedPlayer = await response.json();
+
+			dispatch(setStatus(REQ_STATUS.success));
+			dispatch(updatePlayer(updatedPlayer));
+			dispatch(clearSelectedPlayer());
+		} catch (error) {
+			dispatch(setStatus(REQ_STATUS.error));
+		}
+	};
+};

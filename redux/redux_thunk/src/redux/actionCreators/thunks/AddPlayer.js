@@ -14,4 +14,31 @@
  * @param {Object} newPlayer -  The player to be added
  * @return {Function} - thunk with dispatch as param
  */
-export const postPlayer = (newPlayer) => {};
+
+import { setStatus } from '../statusActions';
+import { REQ_STATUS } from '../../constants';
+import { addPlayer } from '../playersActions';
+import { clearSelectedPlayer } from '../selectedPlayerActions';
+
+export const postPlayer = (newPlayer) => {
+	return async (dispatch) => {
+		try {
+			await dispatch(setStatus(REQ_STATUS.loading));
+			const response = await fetch('http://localhost:3001/api/players', {
+				method: 'POST',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(newPlayer),
+			});
+
+			const addedPlayer = await response.json();
+			dispatch(setStatus(REQ_STATUS.success));
+			dispatch(addPlayer(addedPlayer));
+			dispatch(clearSelectedPlayer());
+		} catch (error) {
+			dispatch(setStatus(REQ_STATUS.error));
+		}
+	};
+};

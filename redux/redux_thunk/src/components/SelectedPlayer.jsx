@@ -11,10 +11,28 @@
 
 */
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
+import {
+	deleteSelectedPlayer,
+	updateSelectedPlayer,
+} from '../redux/actionCreators/thunks/SelectedPlayer';
 
 export const SelectedPlayer = () => {
+	const [isChecked, setIsChecked] = useState(false);
+	const [enableUpdate, setEnableUpdate] = useState(false);
+
+	const dispatch = useDispatch();
 	const player = useSelector((state) => state.selectedPlayer);
+
+	useEffect(() => {
+		setIsChecked(player.isActive);
+	}, [player]);
+
+	const handleCheckboxChange = () => {
+		setIsChecked(!isChecked);
+		setEnableUpdate(!enableUpdate);
+	};
 
 	return (
 		<div>
@@ -22,8 +40,33 @@ export const SelectedPlayer = () => {
 				<div>
 					<h3>Selected Player</h3>
 					<div id='selected-player'>
+						<div className='player-id'>{player.id}</div>
 						<div id='player-name'>{player.name}</div>
-						<div id='player-status'>{player.isActive ? 'active' : 'inactive'}</div>
+						<div id='player-status'>
+							<label id='checkbox-label'>
+								{isChecked ? 'active' : 'inactive'}
+								<input
+									id='checkbox'
+									type='checkbox'
+									checked={isChecked}
+									onChange={() => handleCheckboxChange()}
+								/>
+								<span className='checkmark'></span>
+							</label>
+						</div>
+						<button
+							className='btn-update'
+							disabled={enableUpdate === false}
+							onClick={() => dispatch(updateSelectedPlayer(player))}
+						>
+							Update
+						</button>
+						<button
+							className='btn-delete'
+							onClick={() => dispatch(deleteSelectedPlayer(player.id))}
+						>
+							Delete
+						</button>
 					</div>
 				</div>
 			) : null}

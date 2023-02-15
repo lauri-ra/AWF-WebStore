@@ -19,6 +19,14 @@ const playersReducer = (state = defaultState, action) => {
 	switch (action.type) {
 		case SET_PLAYERS:
 			return action.payload;
+		case REMOVE_PLAYER:
+			const id = action.payload.id;
+			return state.filter((player) => player.id !== id);
+		case UPDATE_PLAYER:
+			const updatedPlayer = action.payload;
+			return state.map((player) => (player.id !== updatedPlayer.id ? player : updatedPlayer));
+		case ADD_PLAYER:
+			return [...state, action.payload];
 		default:
 			return state;
 	}
