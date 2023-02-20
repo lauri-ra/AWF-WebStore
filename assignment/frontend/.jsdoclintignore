@@ -1,0 +1,11 @@
+node_modules/
+public/
+.vscode/
+index.js
+test/
+tests/
+coverage/
+setup/
+setupTests.js
+vite.config.js
+cypress.config.js
