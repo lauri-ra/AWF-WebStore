@@ -7,11 +7,17 @@ Instructions
 -->
 
 <template>
-  <div>
-  </div>
+	<div>
+		<h2>Alert</h2>
+		<div :class="notification">{{ noti }}</div>
+	</div>
 </template>
 
-
-
 <script setup>
+import { usePlayerStore } from '../stores/player.store';
+
+const store = usePlayerStore();
+
+const noti = store.alertNotification;
+console.log('notification : ', noti);
 </script>

@@ -7,10 +7,22 @@
      b. button with id "add_btn" 
  -->
 
-
 <template>
+	<div>
+		<h3>Add player</h3>
+		<input id="input_player" v-model="name" />
+		<button id="add-btn" placeholder="name-of-the-player" @click="handleSubmit(name)">
+			Add player
+		</button>
+	</div>
 </template>
 
-
 <script setup>
+import { usePlayerStore } from '../stores/player.store.js';
+
+const store = usePlayerStore();
+
+const handleSubmit = (name) => {
+	store.addPlayer(name);
+};
 </script>

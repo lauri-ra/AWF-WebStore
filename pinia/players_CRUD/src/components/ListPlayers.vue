@@ -11,13 +11,24 @@
  -->
 
 <template>
-    <div>
-    </div>
+	<div>
+		<ul id="playerList">
+			<li v-for="(player, index) in players" :key="index">
+				{{ player.name }}
+				<button id="rm_btn" @click="handleRemove(index)">remove</button>
+			</li>
+		</ul>
+	</div>
 </template>
 
-
-
 <script setup>
+import { usePlayerStore } from '../stores/player.store.js';
 
+const store = usePlayerStore();
 
+const players = store.playerList;
+
+const handleRemove = (index) => {
+	store.removeIndex(index);
+};
 </script>

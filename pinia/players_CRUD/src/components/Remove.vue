@@ -9,11 +9,24 @@
 
 -->
 <template>
-  <div>
-  </div>
+	<div>
+		<button id="rm_last" @click="handleRmLast()">Remove last</button>
+		<button id="rm_delay" @click="removeAll()">Remove all with delay</button>
+	</div>
 </template>
 
-
 <script setup>
-</script>
+import { usePlayerStore } from '../stores/player.store';
 
+const store = usePlayerStore();
+
+const handleRmLast = () => {
+	store.removeLast();
+};
+
+const removeAll = () => {
+	const notification = 'All players are removed with a delay';
+	store.addNotification(notification);
+	store.removeAllWithDelay();
+};
+</script>
