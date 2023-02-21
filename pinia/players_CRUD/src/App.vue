@@ -2,14 +2,15 @@
   <div>
     <h1>{{ title }}</h1>
     <PiniaLogo />
-    <Players />
+    <AddPlayer />
+    <ListPlayers />
     <Remove />
-    <Status />
+    <Notification />
   </div>
 </template>
 
 <script setup>
-import { PiniaLogo, Remove, Status, Players } from '@/components'
+import { PiniaLogo, AddPlayer, ListPlayers, Remove, Notification } from '@/components'
 const title = 'Pinia';
 </script>
 

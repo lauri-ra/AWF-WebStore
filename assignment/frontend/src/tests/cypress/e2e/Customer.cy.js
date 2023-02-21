@@ -175,6 +175,13 @@ describe('END-TO-END - CUSTOMER', () => {
 	});
 
 	describe('Handling order page', () => {
+		afterEach(() => {
+			logOut();
+			// Expect to be redirected to login page
+			testPathIsCorrect(`/login`);
+			// Expect to see login component
+			getElement(containerId.form).exists();
+		});
 		describe('Has no orders', () => {
 			let noOrdersCustomer;
 			let ordersElement;
@@ -184,10 +191,6 @@ describe('END-TO-END - CUSTOMER', () => {
 				navigateToPage('orders');
 				ordersElement = getElement(containerId.main);
 			});
-			afterEach(() => {
-				logOut();
-			});
-
 			it('Should list no orders', () => {
 				ordersElement.exists();
 				ordersElement.getChildElement(containerId.empty).exists();
@@ -206,17 +209,13 @@ describe('END-TO-END - CUSTOMER', () => {
 				products = getAllProducts();
 			});
 
-			afterEach(() => {
-				logOut();
-			});
-
 			it('Should be able to list only the customers own orders', () => {
 				ordersElement.checkChildCount('list-item', orders.length);
 			});
 
 			it('Should be able to inspect the customers own orders, which shows all items in an order', () => {
 				const order = orders[0];
-				let orderElement = ordersElement.getChildElement(
+				const orderElement = ordersElement.getChildElement(
 					containerId.listItem(order.id)
 				);
 				orderElement.click(linkId.inspect);

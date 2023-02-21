@@ -30,7 +30,7 @@ beforeEach(() => {
 	oldCart = [...cart, oldCartItem];
 });
 
-describe('authReducer', () => {
+describe('cartReducer', () => {
 	it('should return the initial state', () => {
 		expect(cartReducer(undefined, {})).toEqual([]);
 	});
