@@ -5,14 +5,17 @@
     "es6": true,
     "node": true
   },
-  "extends": ["react-app","eslint:recommended"],
+  "extends": ["react-app"],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
   },
   "parserOptions": {
     "ecmaVersion": 2020,
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
   "noInlineConfig": true,
   "overrides": [
@@ -21,9 +24,17 @@
     }
   ],
   "rules": {
+    "react/button-has-type": "error",
+    "react/display-name": "error",
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
     "react/no-direct-mutation-state": "error",
-    "react/no-unescaped-entities": "error"
+    "react/no-array-index-key": "error", 
+    "react/no-unescaped-entities": "error",
+    "react/prop-types": "error",
+    "react/react-in-jsx-scope": "warn",
+    "react/require-default-props": "error",
+    "react-hooks/exhaustive-deps": "error",
+    "react-hooks/rules-of-hooks": "error"
   }
 }
