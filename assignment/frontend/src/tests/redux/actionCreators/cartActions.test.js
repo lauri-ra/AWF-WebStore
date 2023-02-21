@@ -62,7 +62,7 @@ describe('Testing thunk action creators', () => {
 				window.localStorage.__proto__.setItem = vi.fn();
 
 				// assertions as usual:
-				store.dispatch(addCartItem(newCartItem));
+				store.dispatch(addCartItem(product));
 				try {
 					expect(localStorage.setItem).toHaveBeenCalled();
 				} catch (error) {
