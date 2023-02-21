@@ -12,7 +12,10 @@
   },
   "parserOptions": {
     "ecmaVersion": 2020,
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
   "noInlineConfig": true,
   "rules": {
@@ -25,7 +28,7 @@
     "no-promise-executor-return": "error",
     "no-undef": "off",
     "no-unused-vars": "off",
-    "camelcase": "error",
+    "camelcase": "warn",
     "arrow-spacing": "warn",
     "no-var": "error",
     "prefer-const": "error",
