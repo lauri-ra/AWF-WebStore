@@ -2,15 +2,7 @@
 
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import {
-	afterAll,
-	afterEach,
-	beforeEach,
-	describe,
-	expect,
-	it,
-	vi,
-} from 'vitest';
+import { afterAll, afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import {
 	addCartItem,
@@ -66,9 +58,7 @@ describe('Testing thunk action creators', () => {
 				try {
 					expect(localStorage.setItem).toHaveBeenCalled();
 				} catch (error) {
-					throw new Error(
-						'FAILURE: Did you remember to add the cart item in local storage?'
-					);
+					throw new Error('FAILURE: Did you remember to add the cart item in local storage?');
 				}
 				const actualActions = store.getActions();
 				expect(actualActions).toEqual(expectedActions);
@@ -90,9 +80,7 @@ describe('Testing thunk action creators', () => {
 				try {
 					expect(localStorage.setItem).toHaveBeenCalled();
 				} catch (error) {
-					throw new Error(
-						'FAILURE: Did you remember to remove the cart item from local storage?'
-					);
+					throw new Error('FAILURE: Did you remember to remove the cart item from local storage?');
 				}
 				const actualActions = store.getActions();
 				expect(actualActions).toEqual(expectedActions);
@@ -118,9 +106,7 @@ describe('Testing thunk action creators', () => {
 				try {
 					expect(localStorage.setItem).toHaveBeenCalled();
 				} catch (error) {
-					throw new Error(
-						'FAILURE: Did you remember to update the cart item at local storage?'
-					);
+					throw new Error('FAILURE: Did you remember to update the cart item at local storage?');
 				}
 				const actualActions = store.getActions();
 				expect(actualActions).toEqual(expectedActions);
@@ -146,9 +132,7 @@ describe('Testing thunk action creators', () => {
 				try {
 					expect(localStorage.setItem).toHaveBeenCalled();
 				} catch (error) {
-					throw new Error(
-						'FAILURE: Did you remember to update the cart item at local storage?'
-					);
+					throw new Error('FAILURE: Did you remember to update the cart item at local storage?');
 				}
 				const actualActions = store.getActions();
 				expect(actualActions).toEqual(expectedActions);
