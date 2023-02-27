@@ -2,8 +2,14 @@ node_modules/
 public/
 .vscode/
 index.js
+browser_tests/
+__tests__/
 test/
 tests/
+cypress/
+coverage/
+setup/
+mocks/
 coverage/
 setup/
 setupTests.js
