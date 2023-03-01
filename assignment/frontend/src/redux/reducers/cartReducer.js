@@ -8,6 +8,8 @@ import {
 	UPDATE_CART_ITEM_AMOUNT,
 } from '../../tests/constants/redux.js';
 
+const initialState = [];
+
 /**
  * Implement cartReducer that handles following cases:
  * 1) INIT_CART: returns the actions payload if there is a payload. Otherwise returns state.
@@ -19,5 +21,25 @@ import {
  * @param {Object} action the action that calls the reducer.
  * @returns {Array} new state for cart
  */
-const cartReducer = (state = [], action) => {};
+const cartReducer = (state = initialState, action) => {
+	switch (action.type) {
+		case INIT_CART:
+			return action.payload;
+		case ADD_CART_ITEM:
+			return [...state, action.payload];
+		case REMOVE_CART_ITEM: {
+			return state.filter((item) => item.product.id !== action.payload.id);
+		}
+		case UPDATE_CART_ITEM_AMOUNT:
+			return state.map((item) =>
+				item.product.id !== action.payload.productId
+					? item
+					: { ...item, quantity: item.quantity + action.payload.amount }
+			);
+		case EMPTY_CART:
+			return initialState;
+		default:
+			return state;
+	}
+};
 export default cartReducer;

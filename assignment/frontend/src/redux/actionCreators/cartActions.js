@@ -11,6 +11,7 @@ import {
 	REMOVE_CART_ITEM,
 	UPDATE_CART_ITEM_AMOUNT,
 } from '../../tests/constants/redux.js';
+
 /**
  * @description Action creator that initiates the cart after page is refreshed.
  * Sends an INIT_CART-type action along with pre-existing cart-items stored locally as
@@ -63,7 +64,9 @@ export const addCartItem = (product) => {
  * @return {Object} Action
  */
 export const removeCartItem = (product) => {
-	localStorage.setItem('cartItem', []);
+	const cart = JSON.parse(localStorage.getItem('cart'));
+	const updatedCart = cart.map((item) => item !== product);
+	localStorage.setItem('cart', updatedCart);
 
 	return {
 		type: REMOVE_CART_ITEM,
@@ -83,9 +86,9 @@ export const removeCartItem = (product) => {
 export const incrementCartItem = (productId) => {
 	const cart = JSON.parse(localStorage.getItem('cart'));
 
-	const updatedCart = cart.map(product => {
-		if(product.id === productId) {
-			return {...product, quantity: product.quantity + 1 };
+	const updatedCart = cart.map((product) => {
+		if (product.id === productId) {
+			return { ...product, quantity: product.quantity + 1 };
 		}
 		return product;
 	});
@@ -118,10 +121,10 @@ export const incrementCartItem = (productId) => {
 export const decrementCartItem = (productId) => {
 	const cart = JSON.parse(localStorage.getItem('cart'));
 
-	const updatedCart = cart.map(product => {
-		if(product.id === productId) {
+	const updatedCart = cart.map((product) => {
+		if (product.id === productId) {
 			const updatedQuantity = Math.max(product.quantity - 1, 0);
-			return {...product, quantity: updatedQuantity };
+			return { ...product, quantity: updatedQuantity };
 		}
 		return product;
 	});
@@ -147,6 +150,8 @@ export const decrementCartItem = (productId) => {
  * @returns {Object} the action
  */
 export const emptyCart = () => {
+	localStorage.setItem('cart', []);
+
 	return {
 		type: EMPTY_CART,
 	};
