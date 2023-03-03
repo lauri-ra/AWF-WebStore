@@ -19,10 +19,12 @@ import {
  * @return {Object} action
  */
 export const initCart = () => {
-	localStorage.setItem('cart', JSON.stringify([]));
+	const cart = localStorage.getItem('cart');
+	const payload = cart ? JSON.parse(cart) : [];
 
 	return {
 		type: INIT_CART,
+		payload: payload,
 	};
 };
 
