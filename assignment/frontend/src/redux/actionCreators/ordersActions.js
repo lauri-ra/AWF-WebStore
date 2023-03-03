@@ -2,6 +2,8 @@
 
 // ORDER ACTION CREATORS
 
+import axios from 'axios';
+
 import {
 	NEW_NOTIFICATION,
 	GET_ORDERS,
@@ -31,7 +33,7 @@ export const getOrder = (orderId) => {
 		} catch (error) {
 			dispatch({
 				type: NEW_NOTIFICATION,
-				payload: { isSucess: false, message: error.response.data.error },
+				payload: { isSuccess: false, message: error.response.data.error },
 			});
 		}
 	};
@@ -57,7 +59,7 @@ export const getOrders = () => {
 		} catch (error) {
 			dispatch({
 				type: NEW_NOTIFICATION,
-				payload: { isSucess: false, message: error.response.data.error },
+				payload: { isSuccess: false, message: error.response.data.error },
 			});
 		}
 	};
@@ -80,21 +82,21 @@ export const addOrder = (newOrder) => {
 			const response = await axios.post(`http://localhost:3001/api/orders/`, newOrder);
 			const order = await response.data;
 
+			dispatch(emptyCart());
+
 			dispatch({
 				type: ADD_ORDER,
 				payload: order,
 			});
 
-			dispatch(emptyCart());
-
 			dispatch({
 				type: NEW_NOTIFICATION,
-				payload: { isSucess: true, message: orderMsg.newOrder },
+				payload: { isSuccess: true, message: orderMsg.newOrder },
 			});
 		} catch (error) {
 			dispatch({
 				type: NEW_NOTIFICATION,
-				payload: { isSucess: false, message: error.response.data.error },
+				payload: { isSuccess: false, message: error.response.data.error },
 			});
 		}
 	};
