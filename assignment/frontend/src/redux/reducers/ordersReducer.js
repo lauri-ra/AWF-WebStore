@@ -1,11 +1,6 @@
 /** @format */
 
-import {
-	ADD_ORDER,
-	CLEAR_ORDERS,
-	GET_ORDER,
-	GET_ORDERS,
-} from '../../tests/constants/redux.js';
+import { ADD_ORDER, CLEAR_ORDERS, GET_ORDER, GET_ORDERS } from '../../tests/constants/redux.js';
 
 /**
  * Implement ordersReducer that handles following cases:
@@ -17,5 +12,22 @@ import {
  * @param {Object} action the action that calls the reducer.
  * @returns {Array} new state for orders
  */
-const ordersReducer = (state = [], action) => {};
+const ordersReducer = (state = [], action) => {
+	switch (action.type) {
+		case ADD_ORDER:
+			return [...state, action.payload];
+		case CLEAR_ORDERS:
+			return (state = []);
+		case GET_ORDER:
+			if (action.payload === undefined) {
+				return [...state, action.payload];
+			}
+
+			return state.filter((order) => order === action.payload);
+		case GET_ORDERS:
+			return action.payload;
+		default:
+			return state;
+	}
+};
 export default ordersReducer;
