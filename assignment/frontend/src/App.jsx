@@ -7,6 +7,8 @@ import Navbar from './components/Navbar';
 import Notification from './components/Notification';
 import Products from './components/Products';
 import Product from './components/Product';
+import LogOut from './components/LogOut';
+import LoginForm from './components/LoginForm';
 
 import { initApp } from './redux/actionCreators/appActions';
 
@@ -29,6 +31,8 @@ const App = () => {
 				<Route path='/' element={<div>home</div>} />
 				<Route path='/products/' element={<Products />} />
 				<Route path='/products/:id' element={<Product />} />
+				<Route path='/login' element={<LoginForm />} />
+				<Route path='/logout' element={<LogOut />} />
 			</Routes>
 		</div>
 	);
