@@ -3,9 +3,10 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 
-import Navbar from './components/navbar';
-import Notification from './components/notification';
-import Products from './components/products';
+import Navbar from './components/Navbar';
+import Notification from './components/Notification';
+import Products from './components/Products';
+import Product from './components/Product';
 
 import { initApp } from './redux/actionCreators/appActions';
 
@@ -26,7 +27,8 @@ const App = () => {
 
 			<Routes>
 				<Route path='/' element={<div>home</div>} />
-				<Route path='/products/' element={<Products />}></Route>
+				<Route path='/products/' element={<Products />} />
+				<Route path='/products/:id' element={<Product />} />
 			</Routes>
 		</div>
 	);
