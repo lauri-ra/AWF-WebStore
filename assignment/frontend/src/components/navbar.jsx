@@ -54,7 +54,7 @@ const Navbar = () => {
 	const user = useSelector((state) => state.auth);
 
 	return (
-		<div data-testid={dataTestIds.navbar} className='my-4 flex justify-start border-2'>
+		<div data-testid={dataTestIds.navbar} className='my-4 flex justify-center border-2'>
 			<Link data-testid={dataTestIds.home} className='ml-4' to={'/'}>
 				Home
 			</Link>
