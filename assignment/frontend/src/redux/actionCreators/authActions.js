@@ -97,10 +97,12 @@ export const logIn = (logInCreds) => {
 				payload: { isSuccess: true, message: authMsg.welcomeBack },
 			});
 		} catch (error) {
-			dispatch({
-				type: NEW_NOTIFICATION,
-				payload: { isSuccess: false, message: error.response.data.error },
-			});
+			if (typeof error.response.data.error === 'object') {
+				const errMessage = Object.values(error.response.data.error);
+				dispatch(createNotification({ isSuccess: false, message: errMessage[0] }));
+			} else {
+				dispatch(createNotification({ isSuccess: false, message: error.response.data.error }));
+			}
 		}
 	};
 };
