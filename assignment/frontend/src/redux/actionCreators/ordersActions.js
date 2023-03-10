@@ -12,6 +12,11 @@ import {
 	orderMsg,
 } from '../../tests/constants/redux.js';
 import { emptyCart } from './cartActions';
+
+const instance = axios.create({
+	withCredentials: true,
+});
+
 /**
  * @description Action creator for getting a single order. Dispatches action with type GET_ORDER
  * and payload of the fetched order if succesfull.
@@ -23,7 +28,7 @@ import { emptyCart } from './cartActions';
 export const getOrder = (orderId) => {
 	return async (dispatch) => {
 		try {
-			const response = await axios.get(`http://localhost:3001/api/orders/${orderId}`);
+			const response = await instance.get(`http://localhost:3001/api/orders/${orderId}`);
 			const order = await response.data;
 
 			dispatch({
@@ -49,7 +54,7 @@ export const getOrder = (orderId) => {
 export const getOrders = () => {
 	return async (dispatch) => {
 		try {
-			const response = await axios.get('http://localhost:3001/api/orders');
+			const response = await instance.get('http://localhost:3001/api/orders');
 			const orders = await response.data;
 
 			dispatch({
@@ -79,7 +84,7 @@ export const getOrders = () => {
 export const addOrder = (newOrder) => {
 	return async (dispatch) => {
 		try {
-			const response = await axios.post(`http://localhost:3001/api/orders/`, newOrder);
+			const response = await instance.post(`http://localhost:3001/api/orders/`, newOrder);
 			const order = await response.data;
 
 			dispatch(emptyCart());

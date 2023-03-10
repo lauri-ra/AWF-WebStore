@@ -11,7 +11,7 @@ const RegisterForm = () => {
 	const name = useField('text');
 	const email = useField('text');
 	const password = useField('password');
-	const passwordConfirm = useField('password');
+	const pwConfirmation = useField('password');
 
 	const handleRegister = (event) => {
 		event.preventDefault();
@@ -20,10 +20,9 @@ const RegisterForm = () => {
 			name: name.value,
 			email: email.value,
 			password: password.value,
-			passwordConfirm: passwordConfirm.value,
+			passwordConfirmation: pwConfirmation.value,
 		};
 
-		console.log(registerCreds);
 		dispatch(register(registerCreds));
 		navigate('/');
 	};
@@ -56,7 +55,7 @@ const RegisterForm = () => {
 						data-testid={dataTestIds.inputId.passwordConfirmation}
 						placeholder='confirm password'
 						className='my-2 block w-60 rounded-lg border bg-neutral-200 p-2 text-left text-gray-600 outline-none drop-shadow-md hover:border-sky-500 focus:border-sky-500'
-						{...passwordConfirm}
+						{...pwConfirmation}
 					/>
 					<button
 						data-testid={dataTestIds.clickId.submit}

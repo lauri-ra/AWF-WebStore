@@ -13,6 +13,10 @@ import {
 } from '../../tests/constants/redux';
 import { createNotification } from './notificationsActions';
 
+const instance = axios.create({
+	withCredentials: true,
+});
+
 //You can use this  regex for email validation, taken from here: https://stackoverflow.com/questions/46155/whats-the-best-way-to-validate-an-email-address-in-javascript
 const validEmailRegex =
 	/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -29,11 +33,10 @@ const validEmailRegex =
  *
  * @returns {Function}
  */
-
 export const initAuth = () => {
 	return async (dispatch) => {
 		try {
-			const response = await axios.get('http://localhost:3001/api/check-status');
+			const response = await instance.get('http://localhost:3001/api/check-status');
 			const status = await response.data;
 
 			dispatch({
@@ -84,7 +87,7 @@ export const logIn = (logInCreds) => {
 		}
 
 		try {
-			const response = await axios.post('http://localhost:3001/api/login', logInCreds);
+			const response = await instance.post('http://localhost:3001/api/login', logInCreds);
 			const login = await response.data;
 
 			dispatch({
@@ -119,7 +122,7 @@ export const logIn = (logInCreds) => {
  */
 export const logOut = () => {
 	return async (dispatch) => {
-		const response = await axios.get('http://localhost:3001/api/logout');
+		const response = await instance.get('http://localhost:3001/api/logout');
 		const logout = response.data;
 
 		dispatch({
@@ -181,7 +184,12 @@ export const register = (registerCreds) => {
 		}
 
 		try {
-			const response = await axios.post('http://localhost:3001/api/register', registerCreds);
+			const newUser = {
+				name: registerCreds.name,
+				email: registerCreds.email,
+				password: registerCreds.password,
+			};
+			const response = await axios.post('http://localhost:3001/api/register', newUser);
 			const data = await response.data;
 
 			dispatch({

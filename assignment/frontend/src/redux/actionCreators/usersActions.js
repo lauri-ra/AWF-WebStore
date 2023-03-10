@@ -13,6 +13,10 @@ import {
 	userMsg,
 } from '../../tests/constants/redux.js';
 
+const instance = axios.create({
+	withCredentials: true,
+});
+
 /**
  * @description Asynchronous action creator that gets a single user from the backend (if possible)
  * and sends that through thunk to the reducers.
@@ -25,7 +29,7 @@ import {
 export const getUser = (userId) => {
 	return async (dispatch) => {
 		try {
-			const response = await axios.get(`http://localhost:3001/api/users/${userId}`);
+			const response = await instance.get(`http://localhost:3001/api/users/${userId}`);
 			const user = await response.data;
 
 			dispatch({
@@ -51,7 +55,7 @@ export const getUser = (userId) => {
 export const getUsers = () => {
 	return async (dispatch) => {
 		try {
-			const response = await axios.get('http://localhost:3001/api/users/');
+			const response = await instance.get('http://localhost:3001/api/users/');
 			const users = await response.data;
 
 			dispatch({
@@ -78,7 +82,7 @@ export const getUsers = () => {
 export const updateUser = (updatedUser) => {
 	return async (dispatch) => {
 		try {
-			const response = await axios.put(
+			const response = await instance.put(
 				`http://localhost:3001/api/users/${updatedUser.id}`,
 				updatedUser
 			);
@@ -113,7 +117,7 @@ export const updateUser = (updatedUser) => {
 export const removeUser = (userId) => {
 	return async (dispatch) => {
 		try {
-			const response = await axios.delete(`http://localhost:3001/api/users/${userId}`);
+			const response = await instance.delete(`http://localhost:3001/api/users/${userId}`);
 			const user = await response.data;
 
 			dispatch({

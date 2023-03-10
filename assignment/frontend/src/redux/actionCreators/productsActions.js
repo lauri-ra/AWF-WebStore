@@ -14,6 +14,10 @@ import {
 	UPDATE_PRODUCT,
 } from '../../tests/constants/redux.js';
 
+const instance = axios.create({
+	withCredentials: true,
+});
+
 /**
  * @description Asynchronous Action creator for getting a single product.
  * Dispatches an action with type GET_PRODUCT through thunk if succesful
@@ -81,7 +85,7 @@ export const getProducts = () => {
 export const addProduct = (productToAdd) => {
 	return async (dispatch) => {
 		try {
-			await axios.post('http://localhost:3001/api/products/', productToAdd);
+			await instance.post('http://localhost:3001/api/products/', productToAdd);
 
 			dispatch({
 				type: ADD_PRODUCT,
@@ -124,7 +128,10 @@ export const addProduct = (productToAdd) => {
 export const updateProduct = (productToUpdate) => {
 	return async (dispatch) => {
 		try {
-			await axios.put(`http://localhost:3001/api/products/${productToUpdate.id}`, productToUpdate);
+			await instance.put(
+				`http://localhost:3001/api/products/${productToUpdate.id}`,
+				productToUpdate
+			);
 
 			dispatch({
 				type: UPDATE_PRODUCT,
@@ -158,7 +165,7 @@ export const updateProduct = (productToUpdate) => {
 export const deleteProduct = (productId) => {
 	return async (dispatch) => {
 		try {
-			const response = await axios.delete(`http://localhost:3001/api/products/${productId}`);
+			const response = await instance.delete(`http://localhost:3001/api/products/${productId}`);
 			const product = await response.data;
 
 			dispatch({
