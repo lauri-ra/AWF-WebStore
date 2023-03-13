@@ -63,13 +63,7 @@ describe('Testing thunk action creators', () => {
 
 				// assertions as usual:
 				store.dispatch(addCartItem(product));
-				try {
-					expect(localStorage.setItem).toHaveBeenCalled();
-				} catch (error) {
-					throw new Error(
-						'FAILURE: Did you remember to add the cart item in local storage?'
-					);
-				}
+				expect(localStorage.setItem).toHaveBeenCalledTimes(1);
 				const actualActions = store.getActions();
 				expect(actualActions).toEqual(expectedActions);
 			});
@@ -87,13 +81,7 @@ describe('Testing thunk action creators', () => {
 				window.localStorage.__proto__.setItem = vi.fn();
 
 				store.dispatch(removeCartItem(product));
-				try {
-					expect(localStorage.setItem).toHaveBeenCalled();
-				} catch (error) {
-					throw new Error(
-						'FAILURE: Did you remember to remove the cart item from local storage?'
-					);
-				}
+				expect(localStorage.setItem).toHaveBeenCalledTimes(1);
 				const actualActions = store.getActions();
 				expect(actualActions).toEqual(expectedActions);
 			});
@@ -115,13 +103,7 @@ describe('Testing thunk action creators', () => {
 				window.localStorage.__proto__.setItem = vi.fn();
 
 				store.dispatch(incrementCartItem(product.id));
-				try {
-					expect(localStorage.setItem).toHaveBeenCalled();
-				} catch (error) {
-					throw new Error(
-						'FAILURE: Did you remember to update the cart item at local storage?'
-					);
-				}
+				expect(localStorage.setItem).toHaveBeenCalledTimes(1);
 				const actualActions = store.getActions();
 				expect(actualActions).toEqual(expectedActions);
 			});
@@ -143,13 +125,9 @@ describe('Testing thunk action creators', () => {
 				window.localStorage.__proto__.setItem = vi.fn();
 
 				store.dispatch(decrementCartItem(product.id));
-				try {
-					expect(localStorage.setItem).toHaveBeenCalled();
-				} catch (error) {
-					throw new Error(
-						'FAILURE: Did you remember to update the cart item at local storage?'
-					);
-				}
+
+				expect(localStorage.setItem).toHaveBeenCalledTimes(1);
+
 				const actualActions = store.getActions();
 				expect(actualActions).toEqual(expectedActions);
 			});
@@ -165,13 +143,7 @@ describe('Testing thunk action creators', () => {
 				];
 				window.localStorage.__proto__.removeItem = vi.fn();
 				store.dispatch(emptyCart());
-				try {
-					expect(localStorage.setItem).toHaveBeenCalled();
-				} catch (error) {
-					throw new Error(
-						'FAILURE: Did you remember to remove the entire cart from local storage?'
-					);
-				}
+				expect(localStorage.removeItem).toHaveBeenCalledTimes(1);
 				const actualActions = store.getActions();
 				expect(actualActions).toEqual(expectedActions);
 			});
