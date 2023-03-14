@@ -85,11 +85,12 @@ export const getProducts = () => {
 export const addProduct = (productToAdd) => {
 	return async (dispatch) => {
 		try {
-			await instance.post('http://localhost:3001/api/products/', productToAdd);
+			const response = await instance.post('http://localhost:3001/api/products/', productToAdd);
+			const product = await response.data;
 
 			dispatch({
 				type: ADD_PRODUCT,
-				payload: productToAdd,
+				payload: product,
 			});
 
 			dispatch({
