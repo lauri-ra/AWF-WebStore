@@ -30,7 +30,7 @@ const productsReducer = (state = [], action) => {
 		case GET_PRODUCTS:
 			return action.payload;
 		case UPDATE_PRODUCT:
-			return state.map((product) => (product === action.payload ? action.payload : product));
+			return state.map((product) => (product.id === action.payload.id ? action.payload : product));
 		default:
 			return state;
 	}

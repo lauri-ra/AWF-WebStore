@@ -129,14 +129,15 @@ export const addProduct = (productToAdd) => {
 export const updateProduct = (productToUpdate) => {
 	return async (dispatch) => {
 		try {
-			await instance.put(
+			const response = await instance.put(
 				`http://localhost:3001/api/products/${productToUpdate.id}`,
 				productToUpdate
 			);
+			const product = response.data;
 
 			dispatch({
 				type: UPDATE_PRODUCT,
-				payload: productToUpdate,
+				payload: product,
 			});
 
 			dispatch({
