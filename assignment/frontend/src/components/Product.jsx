@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { dataTestIds } from '../tests/constants/components';
 import { deleteProduct } from '../redux/actionCreators/productsActions';
+import { addCartItem } from '../redux/actionCreators/cartActions';
 
 const Product = () => {
 	const { id } = useParams();
@@ -14,6 +15,11 @@ const Product = () => {
 	const handleDelete = () => {
 		dispatch(deleteProduct(id));
 		navigate('/products');
+	};
+
+	const handleAdd = () => {
+		console.log('add product', product);
+		dispatch(addCartItem(product));
 	};
 
 	return (
@@ -46,6 +52,7 @@ const Product = () => {
 				<button
 					data-testid={dataTestIds.clickId.add}
 					className='rounded-md bg-sky-500 px-2 py-1 font-semibold text-white hover:bg-sky-400'
+					onClick={handleAdd}
 				>
 					Add to cart
 				</button>
