@@ -14,6 +14,7 @@ import ProductModify from './components/ProductModify';
 import Users from './components/Users';
 import User from './components/User';
 import UserModify from './components/UserModify';
+import Orders from './components/Orders';
 
 import { initApp } from './redux/actionCreators/appActions';
 
@@ -43,6 +44,7 @@ const App = () => {
 				<Route path='/users' element={<Users />} />
 				<Route path='users/:id' element={<User />} />
 				<Route path='users/:id/modify' element={<UserModify />} />
+				<Route path='/orders' element={<Orders />} />
 			</Routes>
 		</div>
 	);
