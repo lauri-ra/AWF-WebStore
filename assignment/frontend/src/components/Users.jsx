@@ -22,6 +22,7 @@ const BottomPanel = ({ user }) => {
 				</button>
 			</Link>
 			<button
+				data-testid={dataTestIds.clickId.delete}
 				onClick={handleDelete}
 				className='mx-2 rounded-md bg-rose-400 px-2 py-1 font-semibold text-white hover:bg-sky-400'
 			>

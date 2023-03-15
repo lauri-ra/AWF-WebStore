@@ -10,8 +10,9 @@ import Product from './components/Product';
 import LogOut from './components/LogOut';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
-import ModifyForm from './components/ModifyForm';
+import ProductModify from './components/ProductModify';
 import Users from './components/Users';
+import User from './components/User';
 
 import { initApp } from './redux/actionCreators/appActions';
 
@@ -34,11 +35,12 @@ const App = () => {
 				<Route path='/' element={<div>home</div>} />
 				<Route path='/products/' element={<Products />} />
 				<Route path='/products/:id' element={<Product />} />
-				<Route path='products/:id/modify' element={<ModifyForm />} />
+				<Route path='products/:id/modify' element={<ProductModify />} />
 				<Route path='/login' element={<LoginForm />} />
 				<Route path='/logout' element={<LogOut />} />
 				<Route path='/register' element={<RegisterForm />} />
 				<Route path='/users' element={<Users />} />
+				<Route path='users/:id' element={<User />} />
 			</Routes>
 		</div>
 	);

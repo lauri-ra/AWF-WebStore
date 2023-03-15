@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { dataTestIds } from '../tests/constants/components';
 import { updateProduct } from '../redux/actionCreators/productsActions';
 
-const ModifyForm = () => {
+const ProductModify = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
@@ -75,4 +75,4 @@ const ModifyForm = () => {
 	);
 };
 
-export default ModifyForm;
+export default ProductModify;
