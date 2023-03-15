@@ -28,7 +28,7 @@ const usersReducer = (state = [], action) => {
 		case CLEAR_USERS:
 			return (state = []);
 		case UPDATE_USER:
-			return [...state.filter((user) => user !== action.payload), action.payload];
+			return [...state.filter((user) => user.id !== action.payload.id), action.payload];
 		case REMOVE_USER:
 			return state.filter((user) => user.id !== action.payload.id);
 		default:

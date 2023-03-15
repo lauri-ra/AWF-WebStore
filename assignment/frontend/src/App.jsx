@@ -13,6 +13,7 @@ import RegisterForm from './components/RegisterForm';
 import ProductModify from './components/ProductModify';
 import Users from './components/Users';
 import User from './components/User';
+import UserModify from './components/UserModify';
 
 import { initApp } from './redux/actionCreators/appActions';
 
@@ -41,6 +42,7 @@ const App = () => {
 				<Route path='/register' element={<RegisterForm />} />
 				<Route path='/users' element={<Users />} />
 				<Route path='users/:id' element={<User />} />
+				<Route path='users/:id/modify' element={<UserModify />} />
 			</Routes>
 		</div>
 	);
