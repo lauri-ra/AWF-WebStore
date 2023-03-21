@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { dataTestIds } from '../tests/constants/components';
+import { addOrder } from '../redux/actionCreators/ordersActions';
 import {
 	incrementCartItem,
 	decrementCartItem,
@@ -32,13 +33,11 @@ const CartItem = ({ item, handleDecrease, handleIncrease }) => {
 
 const Cart = () => {
 	const cart = useSelector((state) => state.cart);
-
 	const dispatch = useDispatch();
 
-	// Removing items doesnt update the view???
 	const handleDecrease = (item) => {
 		if (item.quantity === 0) {
-			console.log('removing item', item);
+			console.log('asdasdadsad');
 			dispatch(removeCartItem(item));
 		} else {
 			dispatch(decrementCartItem(item.product.id));
@@ -47,6 +46,12 @@ const Cart = () => {
 
 	const handleIncrease = (item) => {
 		dispatch(incrementCartItem(item.product.id));
+	};
+
+	const createOrder = () => {
+		const cartItems = { items: cart };
+		console.log(cartItems);
+		dispatch(addOrder(cartItems));
 	};
 
 	return (
@@ -66,6 +71,7 @@ const Cart = () => {
 
 					<button
 						data-testid={dataTestIds.clickId.add}
+						onClick={createOrder}
 						className='my-2 rounded-md bg-sky-500 px-2 py-1 font-semibold text-white hover:bg-sky-400'
 					>
 						Place an order

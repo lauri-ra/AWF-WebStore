@@ -18,7 +18,8 @@ const Product = () => {
 	};
 
 	const handleAdd = () => {
-		dispatch(addCartItem(product));
+		const { image, ...cartProduct } = product;
+		dispatch(addCartItem(cartProduct));
 	};
 
 	return (
