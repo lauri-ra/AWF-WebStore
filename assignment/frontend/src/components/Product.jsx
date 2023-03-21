@@ -18,7 +18,6 @@ const Product = () => {
 	};
 
 	const handleAdd = () => {
-		console.log('add product', product);
 		dispatch(addCartItem(product));
 	};
 

@@ -47,12 +47,7 @@ export const addCartItem = (product) => {
 			quantity: 1,
 		};
 
-		// Cart shouldnt be empty here? if initCart is called correctly?
-		let cart = localStorage.getItem('cart');
-
-		if (!cart) {
-			cart = [];
-		}
+		const cart = JSON.parse(localStorage.getItem('cart'));
 
 		cart.push(productObj);
 		localStorage.setItem('cart', JSON.stringify(cart));
