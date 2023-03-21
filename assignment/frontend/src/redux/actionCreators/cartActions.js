@@ -23,7 +23,7 @@ export const initCart = () => {
 	const payload = cart ? JSON.parse(cart) : [];
 
 	if (!cart) {
-		localStorage.setItem('cart', []);
+		localStorage.setItem('cart', JSON.stringify([]));
 	}
 
 	return {
@@ -73,8 +73,10 @@ export const addCartItem = (product) => {
  */
 export const removeCartItem = (product) => {
 	const cart = JSON.parse(localStorage.getItem('cart'));
-	const updatedCart = cart.map((item) => item !== product);
-	localStorage.setItem('cart', updatedCart);
+
+	const updatedCart = cart.filter((item) => item.product.id !== product.product.id);
+
+	localStorage.setItem('cart', JSON.stringify(updatedCart));
 
 	return {
 		type: REMOVE_CART_ITEM,
@@ -94,14 +96,14 @@ export const removeCartItem = (product) => {
 export const incrementCartItem = (productId) => {
 	const cart = JSON.parse(localStorage.getItem('cart'));
 
-	const updatedCart = cart.map((product) => {
-		if (product.id === productId) {
-			return { ...product, quantity: product.quantity + 1 };
+	const updatedCart = cart.map((item) => {
+		if (item.product.id === productId) {
+			return { ...item, quantity: item.quantity + 1 };
 		}
-		return product;
+		return item;
 	});
 
-	localStorage.setItem('cart', updatedCart);
+	localStorage.setItem('cart', JSON.stringify(updatedCart));
 
 	return (dispatch) => {
 		dispatch({
@@ -129,15 +131,15 @@ export const incrementCartItem = (productId) => {
 export const decrementCartItem = (productId) => {
 	const cart = JSON.parse(localStorage.getItem('cart'));
 
-	const updatedCart = cart.map((product) => {
-		if (product.id === productId) {
-			const updatedQuantity = Math.max(product.quantity - 1, 0);
-			return { ...product, quantity: updatedQuantity };
+	const updatedCart = cart.map((item) => {
+		if (item.product.id === productId) {
+			const updatedQuantity = Math.max(item.quantity - 1, 0);
+			return { ...item, quantity: updatedQuantity };
 		}
-		return product;
+		return item;
 	});
 
-	localStorage.setItem('cart', updatedCart);
+	localStorage.setItem('cart', JSON.stringify(updatedCart));
 
 	return (dispatch) => {
 		dispatch({
