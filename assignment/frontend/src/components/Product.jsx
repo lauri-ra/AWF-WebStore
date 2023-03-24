@@ -12,6 +12,8 @@ const Product = () => {
 	const user = useSelector((state) => state.auth);
 	const product = useSelector((state) => state.products.find((item) => item.id === id));
 
+	console.log(product);
+
 	const handleDelete = () => {
 		dispatch(deleteProduct(id));
 		navigate('/products');

@@ -38,7 +38,7 @@ const Users = () => {
 	const currentUser = useSelector((state) => state.auth);
 
 	useEffect(() => {
-		if (users.length === 0) {
+		if (users.length === 0 || users.length === 1) {
 			dispatch(getUsers());
 		}
 	}, []);

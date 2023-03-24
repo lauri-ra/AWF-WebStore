@@ -22,7 +22,7 @@ import {
 const usersReducer = (state = [], action) => {
 	switch (action.type) {
 		case GET_USER:
-			return [...state, action.payload];
+			return [action.payload];
 		case GET_USERS:
 			return action.payload;
 		case CLEAR_USERS:

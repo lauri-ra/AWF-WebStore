@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { dataTestIds } from '../tests/constants/components';
+import { getUser, removeUser } from '../redux/actionCreators/usersActions';
 
 const BottomPanel = ({ user }) => {
 	const dispatch = useDispatch();
@@ -34,16 +36,26 @@ const BottomPanel = ({ user }) => {
 
 const User = () => {
 	const { id } = useParams();
-	const user = useSelector((state) => state.users.find((item) => item.id === id));
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(getUser(id));
+	}, []);
+
+	const user = useSelector((state) => state.users);
 	const currentUser = useSelector((state) => state.auth);
+
+	if (user.length === 0) {
+		return null;
+	}
 
 	return (
 		<div data-testid={dataTestIds.containerId.inspect} className='flex flex-col items-center'>
 			<div data-testid={dataTestIds.valueId.name} className='text-xl font-semibold'>
-				{user.name}
+				{user[0].name}
 			</div>
-			<div data-testid={dataTestIds.valueId.role}>role: {user.role}</div>
-			<div data-testid={dataTestIds.valueId.email}>email: {user.email}</div>
+			<div data-testid={dataTestIds.valueId.role}>role: {user[0].role}</div>
+			<div data-testid={dataTestIds.valueId.email}>email: {user[0].email}</div>
 
 			{user.id !== currentUser.id && <BottomPanel user={user} />}
 		</div>
