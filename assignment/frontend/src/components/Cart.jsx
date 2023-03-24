@@ -36,8 +36,7 @@ const Cart = () => {
 	const dispatch = useDispatch();
 
 	const handleDecrease = (item) => {
-		if (item.quantity === 0) {
-			console.log('asdasdadsad');
+		if (item.quantity === 1) {
 			dispatch(removeCartItem(item));
 		} else {
 			dispatch(decrementCartItem(item.product.id));
