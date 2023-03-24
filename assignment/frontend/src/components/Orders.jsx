@@ -1,5 +1,7 @@
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { getOrders } from '../redux/actionCreators/ordersActions';
 import { dataTestIds } from '../tests/constants/components';
 
 const AllOrders = ({ orders }) => {
@@ -28,13 +30,23 @@ const AllOrders = ({ orders }) => {
 };
 
 const Orders = () => {
-	const user = useSelector((state) => state.auth);
+	const dispatch = useDispatch();
 	const orders = useSelector((state) => state.orders);
+
+	useEffect(() => {
+		if (orders.length === 0) {
+			dispatch(getOrders());
+		}
+	}, []);
 
 	return (
 		<div data-testid={dataTestIds.containerId.main}>
 			Orders
-			{orders.length === 0 ? <div>No orders yet</div> : <AllOrders orders={orders} />}
+			{orders.length === 0 ? (
+				<div data-testid={dataTestIds.containerId.empty}>No orders yet</div>
+			) : (
+				<AllOrders orders={orders} />
+			)}
 		</div>
 	);
 };
