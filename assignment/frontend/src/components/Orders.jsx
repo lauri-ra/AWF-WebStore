@@ -34,7 +34,7 @@ const Orders = () => {
 	const orders = useSelector((state) => state.orders);
 
 	useEffect(() => {
-		if (orders.length === 0) {
+		if (orders.length === 0 || orders.length === 1) {
 			dispatch(getOrders());
 		}
 	}, []);

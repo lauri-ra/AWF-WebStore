@@ -1,10 +1,24 @@
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { dataTestIds } from '../tests/constants/components';
+import { getOrder } from '../redux/actionCreators/ordersActions';
+import { useEffect } from 'react';
 
 const OrderView = () => {
 	const { id } = useParams();
-	const order = useSelector((state) => state.orders.find((item) => item.id === id));
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(getOrder(id));
+	}, []);
+
+	const orders = useSelector((state) => state.orders);
+
+	if (orders.length !== 1) {
+		return null;
+	}
+
+	const order = orders[0];
 
 	return (
 		<div data-testid={dataTestIds.containerId.inspect}>

@@ -19,11 +19,7 @@ const ordersReducer = (state = [], action) => {
 		case CLEAR_ORDERS:
 			return (state = []);
 		case GET_ORDER:
-			if (action.payload === undefined) {
-				return [...state, action.payload];
-			}
-
-			return state.filter((order) => order === action.payload);
+			return [action.payload];
 		case GET_ORDERS:
 			return action.payload;
 		default:
