@@ -17,35 +17,8 @@ const AddProductBtn = ({ toggleVisibility }) => {
 	);
 };
 
-const ProductCreator = () => {
-	const [visible, setVisible] = useState(false);
-
-	const dispatch = useDispatch();
-
-	const name = useField('text');
-	const price = useField('text');
-	const description = useField('text');
-
-	const toggleVisibility = () => {
-		setVisible(!visible);
-	};
-
-	const handleSubmit = (event) => {
-		event.preventDefault();
-
-		const newProduct = {
-			price: price.value,
-			name: name.value,
-			image: 'http://example.com/aeiou',
-			description: description.value,
-		};
-
-		dispatch(addProduct(newProduct));
-	};
-
-	return visible ? (
-		<AddProductBtn toggleVisibility={toggleVisibility} />
-	) : (
+const CreatorForm = ({ handleSubmit, name, price, description, toggleVisibility }) => {
+	return (
 		<div className='my-2 flex justify-center border-2'>
 			<form className='flex flex-col' data-testid={dataTestIds.containerId.form}>
 				<input
@@ -70,6 +43,41 @@ const ProductCreator = () => {
 				<button onClick={toggleVisibility}>cancel</button>
 			</form>
 		</div>
+	);
+};
+
+const ProductCreator = () => {
+	const [visible, setVisible] = useState(false);
+	const dispatch = useDispatch();
+	const name = useField('text');
+	const price = useField('text');
+	const description = useField('text');
+
+	const toggleVisibility = () => {
+		setVisible(!visible);
+	};
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		const newProduct = {
+			price: price.value,
+			name: name.value,
+			image: 'http://example.com/aeiou',
+			description: description.value,
+		};
+		dispatch(addProduct(newProduct));
+	};
+
+	return visible ? (
+		<AddProductBtn toggleVisibility={toggleVisibility} />
+	) : (
+		<CreatorForm
+			handleSubmit={handleSubmit}
+			toggleVisibility={toggleVisibility}
+			name={name}
+			price={price}
+			description={description}
+		/>
 	);
 };
 

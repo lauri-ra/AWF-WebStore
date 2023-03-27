@@ -1,28 +1,31 @@
+import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { dataTestIds } from '../tests/constants/components';
-import { updateProduct } from '../redux/actionCreators/productsActions';
+import { updateProduct, getProduct } from '../redux/actionCreators/productsActions';
 
-const ProductModify = () => {
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
+const ModifyButtons = ({ product }) => {
+	return (
+		<div>
+			<button
+				data-testid={dataTestIds.clickId.submit}
+				className='mx-2 rounded-md bg-sky-500 px-2 py-1 font-semibold text-white hover:bg-sky-400'
+				type='submit'
+			>
+				Update
+			</button>
+			<button
+				data-testid={dataTestIds.clickId.cancel}
+				className='mx-2 rounded-md bg-sky-500 px-2 py-1 font-semibold text-white hover:bg-sky-400'
+				onClick={() => navigate(`/products/${product.id}`)}
+			>
+				Cancel
+			</button>
+		</div>
+	);
+};
 
-	const { id } = useParams();
-	const product = useSelector((state) => state.products.find((item) => item.id === id));
-
-	const handleUpdate = (event) => {
-		event.preventDefault();
-		const updatedProduct = {
-			id: product.id,
-			name: event.target.name.value,
-			description: event.target.description.value,
-			price: event.target.price.value,
-		};
-
-		dispatch(updateProduct(updatedProduct));
-		navigate(`/products/${product.id}`);
-	};
-
+const ModifyForm = ({ product, handleUpdate }) => {
 	return (
 		<form
 			data-testid={dataTestIds.containerId.form}
@@ -57,22 +60,42 @@ const ProductModify = () => {
 				id='price'
 				defaultValue={product.price}
 			/>
-			<div>
-				<button
-					className='mx-2 rounded-md bg-sky-500 px-2 py-1 font-semibold text-white hover:bg-sky-400'
-					type='submit'
-				>
-					Update
-				</button>
-				<button
-					className='mx-2 rounded-md bg-sky-500 px-2 py-1 font-semibold text-white hover:bg-sky-400'
-					onClick={() => navigate(`/products/${product.id}`)}
-				>
-					Cancel
-				</button>
-			</div>
+			<ModifyButtons product={product} />
 		</form>
 	);
+};
+
+const ProductModify = () => {
+	const { id } = useParams();
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		dispatch(getProduct(id));
+	}, []);
+
+	const products = useSelector((state) => state.products);
+
+	if (products.length !== 1) {
+		return null;
+	}
+
+	const product = products[0];
+
+	const handleUpdate = (event) => {
+		event.preventDefault();
+		const updatedProduct = {
+			id: product.id,
+			name: event.target.name.value,
+			description: event.target.description.value,
+			price: event.target.price.value,
+		};
+
+		dispatch(updateProduct(updatedProduct));
+		navigate(`/products/${product.id}`);
+	};
+
+	return <ModifyForm product={product} handleUpdate={handleUpdate} />;
 };
 
 export default ProductModify;
