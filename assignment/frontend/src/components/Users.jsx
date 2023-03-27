@@ -39,7 +39,7 @@ const Users = () => {
 
 	useEffect(() => {
 		if (users.length <= 1) {
-			console.log('yeet');
+			console.log('getting all users');
 			dispatch(getUsers());
 		}
 	}, []);
