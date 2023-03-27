@@ -1,17 +1,35 @@
+import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { dataTestIds } from '../tests/constants/components';
-import { updateUser } from '../redux/actionCreators/usersActions';
+import { getUser, updateUser } from '../redux/actionCreators/usersActions';
 
 const UserModify = () => {
-	const navigate = useNavigate();
-	const dispatch = useDispatch();
-
 	const { id } = useParams();
-	const user = useSelector((state) => state.users.find((item) => item.id === id));
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
-	const [selectedOption, setSelectedOption] = useState(user.role);
+	const [selectedOption, setSelectedOption] = useState(null);
+
+	useEffect(() => {
+		dispatch(getUser(id));
+	}, []);
+
+	const users = useSelector((state) => state.users);
+
+	useEffect(() => {
+		if (users.length === 1) {
+			const user = users[0];
+			setSelectedOption(user.role);
+		}
+	}, [users]);
+
+	if (users.length !== 1) {
+		return null;
+	}
+
+	const user = users[0];
 
 	const handleOptionChange = (event) => {
 		setSelectedOption(event.target.value);

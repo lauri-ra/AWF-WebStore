@@ -42,20 +42,22 @@ const User = () => {
 		dispatch(getUser(id));
 	}, []);
 
-	const user = useSelector((state) => state.users);
+	const users = useSelector((state) => state.users);
 	const currentUser = useSelector((state) => state.auth);
 
-	if (user.length === 0) {
+	if (users.length === 0) {
 		return null;
 	}
+
+	const user = users[0];
 
 	return (
 		<div data-testid={dataTestIds.containerId.inspect} className='flex flex-col items-center'>
 			<div data-testid={dataTestIds.valueId.name} className='text-xl font-semibold'>
-				{user[0].name}
+				{user.name}
 			</div>
-			<div data-testid={dataTestIds.valueId.role}>role: {user[0].role}</div>
-			<div data-testid={dataTestIds.valueId.email}>email: {user[0].email}</div>
+			<div data-testid={dataTestIds.valueId.role}>role: {user.role}</div>
+			<div data-testid={dataTestIds.valueId.email}>email: {user.email}</div>
 
 			{user.id !== currentUser.id && <BottomPanel user={user} />}
 		</div>
