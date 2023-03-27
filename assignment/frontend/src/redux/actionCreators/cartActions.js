@@ -74,7 +74,7 @@ export const addCartItem = (product) => {
 export const removeCartItem = (product) => {
 	const cart = JSON.parse(localStorage.getItem('cart'));
 
-	const updatedCart = cart.filter((item) => item.product.id !== product.product.id);
+	const updatedCart = cart.filter((item) => item.product.id !== product.id);
 
 	localStorage.setItem('cart', JSON.stringify(updatedCart));
 
