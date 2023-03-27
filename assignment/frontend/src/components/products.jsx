@@ -12,7 +12,7 @@ const Products = () => {
 	const user = useSelector((state) => state.auth);
 
 	useEffect(() => {
-		if (products.length === 0) {
+		if (products.length === 0 || products.length === 1) {
 			dispatch(getProducts());
 		}
 	}, []);
