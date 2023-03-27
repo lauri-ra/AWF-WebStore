@@ -9,7 +9,7 @@ const LogOut = () => {
 
 	useEffect(() => {
 		dispatch(logOut());
-		navigate('/');
+		navigate('/login');
 	});
 };
 

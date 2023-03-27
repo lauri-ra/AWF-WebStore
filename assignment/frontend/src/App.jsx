@@ -30,13 +30,13 @@ const App = () => {
 	}, []);
 
 	return (
-		<div data-testid={dataTestIds.app}>
+		<div data-testid={dataTestIds.containerId.app}>
 			<h1 className='flex justify-center text-5xl'>Store</h1>
 			<Navbar />
 			<Notification />
 
 			<Routes>
-				<Route path='/' element={<div>home</div>} />
+				<Route path='/' element={<div data-testid={dataTestIds.containerId.main}>home</div>} />
 				<Route path='/products/' element={<Products />} />
 				<Route path='/products/:id' element={<Product />} />
 				<Route path='products/:id/modify' element={<ProductModify />} />

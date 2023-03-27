@@ -18,12 +18,15 @@ const Notification = () => {
 			setTimeout(() => {
 				dispatch(removeNotification);
 				setMessage('');
-			}, 5000)
+			}, 4000)
 		);
 	}, [notification]);
 
 	return message ? (
-		<div data-testid='notification-container' className='flex justify-center font-semibold'>
+		<div
+			data-testid={dataTestIds.containerId.notification}
+			className='flex justify-center font-semibold'
+		>
 			{notification.isSuccess ? (
 				<div
 					data-testid={dataTestIds.valueId.description}

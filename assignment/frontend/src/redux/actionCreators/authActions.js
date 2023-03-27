@@ -123,7 +123,7 @@ export const logIn = (logInCreds) => {
 export const logOut = () => {
 	return async (dispatch) => {
 		const response = await instance.get('http://localhost:3001/api/logout');
-		const logout = response.data;
+		const logout = await response.data;
 
 		dispatch({
 			type: REMOVE_AUTH,

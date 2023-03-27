@@ -18,7 +18,7 @@ const Products = () => {
 	}, []);
 
 	return (
-		<div data-testid={dataTestIds.main}>
+		<div data-testid={dataTestIds.containerId.main}>
 			<div className='flex justify-center text-3xl'>Produts</div>
 
 			{user.role === 'admin' && <ProductCreator />}
@@ -30,15 +30,15 @@ const Products = () => {
 						data-testid={`list-item-${product.id}-container`}
 						className='my-3.5 w-64 rounded-md bg-sky-200 px-3.5 py-2 shadow-lg ring-1 ring-white/10 transition duration-100 hover:scale-105 hover:bg-sky-300'
 					>
-						<div data-testid={dataTestIds.name} className='mx-2 font-semibold'>
+						<div data-testid={dataTestIds.valueId.name} className='mx-2 font-semibold'>
 							{product.name}
 						</div>
-						<div data-testid={dataTestIds.price} className='mx-2'>
+						<div data-testid={dataTestIds.valueId.price} className='mx-2'>
 							{product.price} euros
 						</div>
 						<Link
 							to={`/products/${product.id}`}
-							data-testid={dataTestIds.inspect}
+							data-testid={dataTestIds.linkId.inspect}
 							className='mx-2 italic'
 						>
 							View

@@ -55,11 +55,15 @@ describe('Testing thunk action creators', () => {
 
 				// assertions as usual:
 				store.dispatch(addCartItem(product));
+<<<<<<< HEAD
 				try {
 					expect(localStorage.setItem).toHaveBeenCalled();
 				} catch (error) {
 					throw new Error('FAILURE: Did you remember to add the cart item in local storage?');
 				}
+=======
+				expect(localStorage.setItem).toHaveBeenCalledTimes(1);
+>>>>>>> f2dfe04e4828fd832871dde04c94e610f7dae33b
 				const actualActions = store.getActions();
 				expect(actualActions).toEqual(expectedActions);
 			});
@@ -77,11 +81,15 @@ describe('Testing thunk action creators', () => {
 				window.localStorage.__proto__.setItem = vi.fn();
 
 				store.dispatch(removeCartItem(product));
+<<<<<<< HEAD
 				try {
 					expect(localStorage.setItem).toHaveBeenCalled();
 				} catch (error) {
 					throw new Error('FAILURE: Did you remember to remove the cart item from local storage?');
 				}
+=======
+				expect(localStorage.setItem).toHaveBeenCalledTimes(1);
+>>>>>>> f2dfe04e4828fd832871dde04c94e610f7dae33b
 				const actualActions = store.getActions();
 				expect(actualActions).toEqual(expectedActions);
 			});
@@ -103,11 +111,15 @@ describe('Testing thunk action creators', () => {
 				window.localStorage.__proto__.setItem = vi.fn();
 
 				store.dispatch(incrementCartItem(product.id));
+<<<<<<< HEAD
 				try {
 					expect(localStorage.setItem).toHaveBeenCalled();
 				} catch (error) {
 					throw new Error('FAILURE: Did you remember to update the cart item at local storage?');
 				}
+=======
+				expect(localStorage.setItem).toHaveBeenCalledTimes(1);
+>>>>>>> f2dfe04e4828fd832871dde04c94e610f7dae33b
 				const actualActions = store.getActions();
 				expect(actualActions).toEqual(expectedActions);
 			});
@@ -129,11 +141,17 @@ describe('Testing thunk action creators', () => {
 				window.localStorage.__proto__.setItem = vi.fn();
 
 				store.dispatch(decrementCartItem(product.id));
+<<<<<<< HEAD
 				try {
 					expect(localStorage.setItem).toHaveBeenCalled();
 				} catch (error) {
 					throw new Error('FAILURE: Did you remember to update the cart item at local storage?');
 				}
+=======
+
+				expect(localStorage.setItem).toHaveBeenCalledTimes(1);
+
+>>>>>>> f2dfe04e4828fd832871dde04c94e610f7dae33b
 				const actualActions = store.getActions();
 				expect(actualActions).toEqual(expectedActions);
 			});
@@ -149,13 +167,7 @@ describe('Testing thunk action creators', () => {
 				];
 				window.localStorage.__proto__.removeItem = vi.fn();
 				store.dispatch(emptyCart());
-				try {
-					expect(localStorage.setItem).toHaveBeenCalled();
-				} catch (error) {
-					throw new Error(
-						'FAILURE: Did you remember to remove the entire cart from local storage?'
-					);
-				}
+				expect(localStorage.removeItem).toHaveBeenCalledTimes(1);
 				const actualActions = store.getActions();
 				expect(actualActions).toEqual(expectedActions);
 			});

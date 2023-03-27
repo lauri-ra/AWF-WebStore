@@ -7,40 +7,32 @@ import { getUser, updateUser } from '../redux/actionCreators/usersActions';
 
 const RoleSelect = ({ selectedOption, handleOptionChange }) => {
 	return (
-		<div data-testid={dataTestIds.selectId.role} className='my-2 flex flex-col border-2 py-3 px-3'>
-			<label>
-				<input
-					type='radio'
-					value='customer'
-					checked={selectedOption === 'customer'}
-					onChange={handleOptionChange}
-				/>
-				Customer
-			</label>
-
-			<label>
-				<input
-					type='radio'
-					value='admin'
-					checked={selectedOption === 'admin'}
-					onChange={handleOptionChange}
-				/>
-				Admin
-			</label>
-		</div>
+		<select
+			data-testid={dataTestIds.selectId.role}
+			className='my-2 flex flex-col border-2 py-3 px-3'
+			value={selectedOption}
+			onChange={handleOptionChange}
+		>
+			<option value='customer'>customer</option>
+			<option value='admin'>admin</option>
+		</select>
 	);
 };
 
-const ModfiyButtons = ({ user }) => {
+const ModfiyButtons = ({ user, selectedOption }) => {
+	const isDisabled = selectedOption === user.role;
 	return (
 		<div className='my-2'>
 			<button
+				data-testid={dataTestIds.clickId.submit}
 				className='mx-2 rounded-md bg-sky-500 px-2 py-1 font-semibold text-white hover:bg-sky-400'
 				type='submit'
+				disabled={isDisabled}
 			>
 				Submit
 			</button>
 			<button
+				data-testid={dataTestIds.clickId.cancel}
 				className='mx-2 rounded-md bg-sky-500 px-2 py-1 font-semibold text-white hover:bg-sky-400'
 				onClick={() => navigate(`/users/${user.id}`)}
 				type='button'
@@ -97,7 +89,7 @@ const UserModify = () => {
 			</div>
 
 			<RoleSelect selectedOption={selectedOption} handleOptionChange={handleOptionChange} />
-			<ModfiyButtons user={user} />
+			<ModfiyButtons user={user} selectedOption={selectedOption} />
 		</form>
 	);
 };
