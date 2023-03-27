@@ -47,7 +47,6 @@ const UserModify = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-
 	const [selectedOption, setSelectedOption] = useState(null);
 
 	useEffect(() => {
@@ -72,7 +71,8 @@ const UserModify = () => {
 		setSelectedOption(event.target.value);
 	};
 
-	const handleUpdate = () => {
+	const handleUpdate = (event) => {
+		event.preventDefault();
 		const updatedUser = { id: id, role: selectedOption };
 		dispatch(updateUser(updatedUser));
 		navigate('/users');
@@ -87,7 +87,6 @@ const UserModify = () => {
 			<div data-testid={dataTestIds.valueId.name} className='my-2 text-xl font-semibold'>
 				{user.name}
 			</div>
-
 			<RoleSelect selectedOption={selectedOption} handleOptionChange={handleOptionChange} />
 			<ModfiyButtons user={user} selectedOption={selectedOption} />
 		</form>

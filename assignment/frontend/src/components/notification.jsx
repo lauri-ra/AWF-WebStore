@@ -18,7 +18,7 @@ const Notification = () => {
 			setTimeout(() => {
 				dispatch(removeNotification);
 				setMessage('');
-			}, 4000)
+			}, 4500)
 		);
 	}, [notification]);
 

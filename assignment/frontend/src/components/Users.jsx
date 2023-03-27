@@ -38,7 +38,8 @@ const Users = () => {
 	const currentUser = useSelector((state) => state.auth);
 
 	useEffect(() => {
-		if (users.length === 0 || users.length === 1) {
+		if (users.length <= 1) {
+			console.log('yeet');
 			dispatch(getUsers());
 		}
 	}, []);
@@ -57,7 +58,7 @@ const Users = () => {
 							{user.name}
 						</div>
 						<div data-testid={dataTestIds.valueId.role} className='mx-2'>
-							role: {user.role}
+							{user.role}
 						</div>
 						<Link
 							to={`/users/${user.id}`}
