@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { dataTestIds } from '../tests/constants/components';
 
 const UserNav = () => {
@@ -19,6 +19,7 @@ const UserNav = () => {
 };
 
 const CustomerNav = () => {
+	const location = useLocation();
 	return (
 		<>
 			<Link data-testid={dataTestIds.linkId.orders} className='ml-4' to={'/orders'}>
@@ -27,7 +28,12 @@ const CustomerNav = () => {
 			<Link data-testid={dataTestIds.linkId.cart} className='ml-4' to={'/cart'}>
 				Cart
 			</Link>
-			<Link data-testid={dataTestIds.clickId.logout} className='ml-4' to={'/logout'}>
+			<Link
+				data-testid={dataTestIds.clickId.logout}
+				className='ml-4'
+				to={'/logout'}
+				state={{ from: location.pathname }}
+			>
 				Logout
 			</Link>
 		</>
@@ -35,6 +41,7 @@ const CustomerNav = () => {
 };
 
 const AdminNav = () => {
+	const location = useLocation();
 	return (
 		<>
 			<Link data-testid={dataTestIds.linkId.orders} className='ml-4' to={'/orders'}>
@@ -43,7 +50,12 @@ const AdminNav = () => {
 			<Link data-testid={dataTestIds.linkId.users} className='ml-4' to={'/users'}>
 				Users
 			</Link>
-			<Link data-testid={dataTestIds.clickId.logout} className='ml-4' to={'/logout'}>
+			<Link
+				data-testid={dataTestIds.clickId.logout}
+				className='ml-4'
+				to={'/logout'}
+				state={{ from: location.pathname }}
+			>
 				Logout
 			</Link>
 		</>
