@@ -38,18 +38,18 @@ const User = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		dispatch(getUser(id));
-	}, []);
-
 	const users = useSelector((state) => state.users);
 	const currentUser = useSelector((state) => state.auth);
 
-	if (users.length === 0) {
-		return null;
-	}
+	useEffect(() => {
+		if (users.length === 0) {
+			dispatch(getUser(id));
+		}
+	});
 
-	const user = users[0];
+	const user = users.find((usr) => usr.id === id);
+
+	if (!user) return null;
 
 	return (
 		<div data-testid={dataTestIds.containerId.inspect} className='flex flex-col items-center'>

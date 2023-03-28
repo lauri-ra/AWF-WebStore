@@ -1,8 +1,8 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { dataTestIds } from '../tests/constants/components';
-import { updateUser } from '../redux/actionCreators/usersActions';
+import { updateUser, getUser } from '../redux/actionCreators/usersActions';
 
 const RoleSelect = ({ selectedOption, handleOptionChange }) => {
 	return (
@@ -19,6 +19,7 @@ const RoleSelect = ({ selectedOption, handleOptionChange }) => {
 };
 
 const ModfiyButtons = ({ user, selectedOption }) => {
+	const navigate = useNavigate();
 	const isDisabled = selectedOption === user.role;
 	return (
 		<div className='my-2'>
@@ -33,7 +34,7 @@ const ModfiyButtons = ({ user, selectedOption }) => {
 			<button
 				data-testid={dataTestIds.clickId.cancel}
 				className='mx-2 rounded-md bg-sky-500 px-2 py-1 font-semibold text-white hover:bg-sky-400'
-				onClick={() => navigate(`/users/${user.id}`)}
+				onClick={() => navigate(-1)}
 				type='button'
 			>
 				Cancel
@@ -48,7 +49,20 @@ const UserModify = () => {
 	const navigate = useNavigate();
 	const [selectedOption, setSelectedOption] = useState(null);
 
-	const user = useSelector((state) => state.users.find((item) => item.id === id));
+	const users = useSelector((state) => state.users);
+
+	useEffect(() => {
+		if (users.length === 0) {
+			dispatch(getUser(id));
+		} else {
+			const user = users.find((usr) => usr.id === id);
+			setSelectedOption(user.role);
+		}
+	}, [dispatch, id, users]);
+
+	const user = users.find((usr) => usr.id === id);
+
+	if (!user) return null;
 
 	const handleOptionChange = (event) => {
 		setSelectedOption(event.target.value);
@@ -58,7 +72,7 @@ const UserModify = () => {
 		event.preventDefault();
 		const updatedUser = { id: id, role: selectedOption };
 		dispatch(updateUser(updatedUser));
-		navigate('/users');
+		navigate(-1);
 	};
 
 	return (
