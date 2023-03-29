@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { logOut } from '../redux/actionCreators/authActions';
+import { logOut } from '../redux/actionCreators/authActions.js';
 
 /**
  *

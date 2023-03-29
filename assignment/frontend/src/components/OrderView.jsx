@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { dataTestIds } from '../tests/constants/components';
-import { getOrder } from '../redux/actionCreators/ordersActions';
+import { dataTestIds } from '../tests/constants/components.js';
+import { getOrder } from '../redux/actionCreators/ordersActions.js';
 import { useEffect } from 'react';
 
 /**

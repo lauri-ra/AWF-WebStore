@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getOrders } from '../redux/actionCreators/ordersActions';
-import { dataTestIds } from '../tests/constants/components';
+import { getOrders } from '../redux/actionCreators/ordersActions.js';
+import { dataTestIds } from '../tests/constants/components.js';
 
 /**
  *

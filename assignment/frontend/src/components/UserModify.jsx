@@ -1,8 +1,8 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { dataTestIds } from '../tests/constants/components';
-import { updateUser, getUser } from '../redux/actionCreators/usersActions';
+import { dataTestIds } from '../tests/constants/components.js';
+import { updateUser, getUser } from '../redux/actionCreators/usersActions.js';
 
 /**
  *

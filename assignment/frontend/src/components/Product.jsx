@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams, Link } from 'react-router-dom';
-import { dataTestIds } from '../tests/constants/components';
-import { deleteProduct, getProduct } from '../redux/actionCreators/productsActions';
-import { addCartItem, incrementCartItem } from '../redux/actionCreators/cartActions';
+import { dataTestIds } from '../tests/constants/components.js';
+import { deleteProduct, getProduct } from '../redux/actionCreators/productsActions.js';
+import { addCartItem, incrementCartItem } from '../redux/actionCreators/cartActions.js';
 
 /**
  *

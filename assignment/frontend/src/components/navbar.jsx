@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
-import { dataTestIds } from '../tests/constants/components';
+import { dataTestIds } from '../tests/constants/components.js';
 
 /**
  *

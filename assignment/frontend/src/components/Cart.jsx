@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { dataTestIds } from '../tests/constants/components';
-import { addOrder } from '../redux/actionCreators/ordersActions';
+import { dataTestIds } from '../tests/constants/components.js';
+import { addOrder } from '../redux/actionCreators/ordersActions.js';
 import {
 	incrementCartItem,
 	decrementCartItem,
 	removeCartItem,
-} from '../redux/actionCreators/cartActions';
+} from '../redux/actionCreators/cartActions.js';
 
 /**
  *

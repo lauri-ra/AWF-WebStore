@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts, deleteProduct } from '../redux/actionCreators/productsActions';
-import { addCartItem, incrementCartItem } from '../redux/actionCreators/cartActions';
-import { dataTestIds } from '../tests/constants/components';
+import { getProducts, deleteProduct } from '../redux/actionCreators/productsActions.js';
+import { addCartItem, incrementCartItem } from '../redux/actionCreators/cartActions.js';
+import { dataTestIds } from '../tests/constants/components.js';
 
-import ProductCreator from './ProductCreator';
+import ProductCreator from './ProductCreator.jsx';
 
 /**
  *

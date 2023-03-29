@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { dataTestIds } from '../tests/constants/components';
-import { register } from '../redux/actionCreators/authActions';
-import { useField } from '../hooks';
+import { dataTestIds } from '../tests/constants/components.js';
+import { register } from '../redux/actionCreators/authActions.js';
+import { useField } from '../hooks.js';
 import { useNavigate } from 'react-router-dom';
 
 /**

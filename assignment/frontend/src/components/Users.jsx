@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getUsers, removeUser } from '../redux/actionCreators/usersActions';
-import { dataTestIds } from '../tests/constants/components';
+import { getUsers, removeUser } from '../redux/actionCreators/usersActions.js';
+import { dataTestIds } from '../tests/constants/components.js';
 
 /**
  *

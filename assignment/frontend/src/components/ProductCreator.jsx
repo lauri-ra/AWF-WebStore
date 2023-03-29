@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useField } from '../hooks';
-import { addProduct } from '../redux/actionCreators/productsActions';
-import { dataTestIds } from '../tests/constants/components';
+import { useField } from '../hooks.js';
+import { addProduct } from '../redux/actionCreators/productsActions.js';
+import { dataTestIds } from '../tests/constants/components.js';
 
 /**
  *

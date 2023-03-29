@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { dataTestIds } from '../tests/constants/components';
-import { removeNotification } from '../redux/actionCreators/notificationsActions';
+import { dataTestIds } from '../tests/constants/components.js';
+import { removeNotification } from '../redux/actionCreators/notificationsActions.js';
 
 /**
  *

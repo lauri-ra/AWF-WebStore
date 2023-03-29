@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { dataTestIds } from '../tests/constants/components';
-import { logIn } from '../redux/actionCreators/authActions';
-import { useField } from '../hooks';
+import { dataTestIds } from '../tests/constants/components.js';
+import { logIn } from '../redux/actionCreators/authActions.js';
+import { useField } from '../hooks.js';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 

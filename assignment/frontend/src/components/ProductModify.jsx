@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { dataTestIds } from '../tests/constants/components';
-import { updateProduct, getProduct } from '../redux/actionCreators/productsActions';
+import { dataTestIds } from '../tests/constants/components.js';
+import { updateProduct, getProduct } from '../redux/actionCreators/productsActions.js';
 
 /**
  *

@@ -3,22 +3,22 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 
-import Navbar from './components/Navbar';
-import Notification from './components/Notification';
-import Products from './components/Products';
-import Product from './components/Product';
-import LogOut from './components/LogOut';
-import LoginPage from './components/LoginPage';
-import Register from './components/Register';
-import ProductModify from './components/ProductModify';
-import Users from './components/Users';
-import User from './components/User';
-import UserModify from './components/UserModify';
-import Orders from './components/Orders';
-import OrderView from './components/OrderView';
-import Cart from './components/Cart';
+import Navbar from './components/Navbar.jsx';
+import Notification from './components/Notification.jsx';
+import Products from './components/Products.jsx';
+import Product from './components/Product.jsx';
+import LogOut from './components/LogOut.jsx';
+import LoginPage from './components/LoginPage.jsx';
+import Register from './components/Register.jsx';
+import ProductModify from './components/ProductModify.jsx';
+import Users from './components/Users.jsx';
+import User from './components/User.jsx';
+import UserModify from './components/UserModify.jsx';
+import Orders from './components/Orders.jsx';
+import OrderView from './components/OrderView.jsx';
+import Cart from './components/Cart.jsx';
 
-import { initApp } from './redux/actionCreators/appActions';
+import { initApp } from './redux/actionCreators/appActions.js';
 
 import { dataTestIds } from './tests/constants/components.js';
 
