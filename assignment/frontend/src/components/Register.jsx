@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { dataTestIds } from '../tests/constants/components.js';
 import { register } from '../redux/actionCreators/authActions.js';
-import { useField } from '../hooks.js';
+import { useField } from '../hooks/index.js';
 import { useNavigate } from 'react-router-dom';
 
 /**

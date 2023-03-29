@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useField } from '../hooks.js';
+import { useField } from '../hooks/index.js';
 import { addProduct } from '../redux/actionCreators/productsActions.js';
 import { dataTestIds } from '../tests/constants/components.js';
 
