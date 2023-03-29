@@ -6,7 +6,7 @@ import { dataTestIds } from '../tests/constants/components';
 
 const AddProductBtn = ({ toggleVisibility }) => {
 	return (
-		<div className='flex justify-center'>
+		<div className='flex justify-center' data-testid={dataTestIds.clickId.add}>
 			<button
 				onClick={toggleVisibility}
 				className='my-4 rounded-md bg-sky-500 px-3 py-2 font-semibold text-white hover:bg-sky-400'
@@ -39,8 +39,12 @@ const CreatorForm = ({ handleSubmit, name, price, description, toggleVisibility 
 					className='my-2 block w-60 rounded-lg border bg-neutral-200 p-2 text-left text-gray-600 outline-none drop-shadow-md hover:border-sky-500 focus:border-sky-500'
 					{...description}
 				/>
-				<button onClick={handleSubmit}>submit</button>
-				<button onClick={toggleVisibility}>cancel</button>
+				<button data-testid={dataTestIds.clickId.submit} onClick={handleSubmit}>
+					submit
+				</button>
+				<button data-testid={dataTestIds.clickId.cancel} onClick={toggleVisibility}>
+					cancel
+				</button>
 			</form>
 		</div>
 	);
@@ -69,8 +73,6 @@ const ProductCreator = () => {
 	};
 
 	return visible ? (
-		<AddProductBtn toggleVisibility={toggleVisibility} />
-	) : (
 		<CreatorForm
 			handleSubmit={handleSubmit}
 			toggleVisibility={toggleVisibility}
@@ -78,6 +80,8 @@ const ProductCreator = () => {
 			price={price}
 			description={description}
 		/>
+	) : (
+		<AddProductBtn toggleVisibility={toggleVisibility} />
 	);
 };
 

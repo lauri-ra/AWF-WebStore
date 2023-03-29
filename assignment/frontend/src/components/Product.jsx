@@ -39,27 +39,28 @@ const Product = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		dispatch(getProduct(id));
-	}, []);
-
 	const user = useSelector((state) => state.auth);
 	const products = useSelector((state) => state.products);
 
-	if (products.length !== 1) {
-		return null;
-	}
+	useEffect(() => {
+		if (products.length === 0) {
+			console.log('getting single product');
+			dispatch(getProduct(id));
+		}
+	});
+
+	const product = products.find((item) => item.id === id);
+
+	if (!product) return null;
 
 	const handleAdd = () => {
 		const { image, ...cartProduct } = product;
 		dispatch(addCartItem(cartProduct));
 	};
 
-	const product = products[0];
-
 	return (
 		<div
-			data-testid={dataTestIds.linkId.inspect}
+			data-testid={dataTestIds.containerId.inspect}
 			className='flex flex-col items-center justify-start'
 		>
 			<div data-testid={dataTestIds.valueId.name}>{product.name}</div>

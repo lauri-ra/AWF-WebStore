@@ -4,12 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { dataTestIds } from '../tests/constants/components';
 import { updateProduct, getProduct } from '../redux/actionCreators/productsActions';
 
-const ModifyButtons = ({ product }) => {
+const ModifyButtons = () => {
+	const navigate = useNavigate();
 	return (
-		<div>
+		<div className='my-2 flex justify-center'>
 			<button
 				data-testid={dataTestIds.clickId.submit}
 				className='mx-2 rounded-md bg-sky-500 px-2 py-1 font-semibold text-white hover:bg-sky-400'
+				onClick={() => navigate(-1)}
 				type='submit'
 			>
 				Update
@@ -17,7 +19,8 @@ const ModifyButtons = ({ product }) => {
 			<button
 				data-testid={dataTestIds.clickId.cancel}
 				className='mx-2 rounded-md bg-sky-500 px-2 py-1 font-semibold text-white hover:bg-sky-400'
-				onClick={() => navigate(`/products/${product.id}`)}
+				onClick={() => navigate(-1)}
+				type='button'
 			>
 				Cancel
 			</button>
@@ -25,13 +28,9 @@ const ModifyButtons = ({ product }) => {
 	);
 };
 
-const ModifyForm = ({ product, handleUpdate }) => {
+const ModifyForm = ({ product }) => {
 	return (
-		<form
-			data-testid={dataTestIds.containerId.form}
-			className='flex flex-col items-center justify-start'
-			onSubmit={handleUpdate}
-		>
+		<div>
 			<h1 className='font-semibold'>Modify product {product.name}</h1>
 			<input
 				readOnly
@@ -60,8 +59,7 @@ const ModifyForm = ({ product, handleUpdate }) => {
 				id='price'
 				defaultValue={product.price}
 			/>
-			<ModifyButtons product={product} />
-		</form>
+		</div>
 	);
 };
 
@@ -70,20 +68,22 @@ const ProductModify = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	useEffect(() => {
-		dispatch(getProduct(id));
-	}, []);
-
 	const products = useSelector((state) => state.products);
 
-	if (products.length !== 1) {
-		return null;
-	}
+	useEffect(() => {
+		if (products.length === 0) {
+			console.log('getting single product to mod');
+			dispatch(getProduct(id));
+		}
+	});
 
-	const product = products[0];
+	const product = products.find((item) => item.id === id);
+
+	if (!product) return null;
 
 	const handleUpdate = (event) => {
 		event.preventDefault();
+		console.log('clicked update');
 		const updatedProduct = {
 			id: product.id,
 			name: event.target.name.value,
@@ -95,7 +95,16 @@ const ProductModify = () => {
 		navigate(`/products/${product.id}`);
 	};
 
-	return <ModifyForm product={product} handleUpdate={handleUpdate} />;
+	return (
+		<form
+			data-testid={dataTestIds.containerId.form}
+			className='flex flex-col items-center justify-start'
+			onSubmit={handleUpdate}
+		>
+			<ModifyForm product={product} handleUpdate={handleUpdate} />
+			<ModifyButtons />
+		</form>
+	);
 };
 
 export default ProductModify;

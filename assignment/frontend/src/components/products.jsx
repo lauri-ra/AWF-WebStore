@@ -1,10 +1,58 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts } from '../redux/actionCreators/productsActions';
+import { getProducts, deleteProduct } from '../redux/actionCreators/productsActions';
+import { addCartItem } from '../redux/actionCreators/cartActions';
 import { dataTestIds } from '../tests/constants/components';
 
 import ProductCreator from './ProductCreator';
+
+const UserPanel = ({ product }) => {
+	const dispatch = useDispatch();
+
+	const handleAdd = () => {
+		const { image, ...cartProduct } = product;
+		dispatch(addCartItem(cartProduct));
+	};
+
+	return (
+		<button
+			data-testid={dataTestIds.clickId.add}
+			className='rounded-md bg-sky-500 px-2 py-1 font-semibold text-white hover:bg-sky-400'
+			onClick={handleAdd}
+		>
+			Add to cart
+		</button>
+	);
+};
+
+const AdminPanel = ({ product }) => {
+	const dispatch = useDispatch();
+
+	const handleDelete = () => {
+		dispatch(deleteProduct(product.id));
+	};
+
+	return (
+		<div className='mt-2 mb-1'>
+			<Link to={`/products/${product.id}/modify`}>
+				<button
+					data-testid={dataTestIds.clickId.modify}
+					className='mx-2 mt-2 mb-1 rounded-md bg-sky-500 px-2 py-1 font-semibold text-white hover:bg-sky-400'
+				>
+					Modify
+				</button>
+			</Link>
+			<button
+				data-testid={dataTestIds.clickId.delete}
+				onClick={handleDelete}
+				className='mx-2 rounded-md bg-rose-400 px-2 py-1 font-semibold text-white hover:bg-sky-400'
+			>
+				Delete
+			</button>
+		</div>
+	);
+};
 
 const Products = () => {
 	const dispatch = useDispatch();
@@ -12,7 +60,8 @@ const Products = () => {
 	const user = useSelector((state) => state.auth);
 
 	useEffect(() => {
-		if (products.length === 0 || products.length === 1) {
+		if (products.length <= 1) {
+			console.log('getting all products');
 			dispatch(getProducts());
 		}
 	}, []);
@@ -41,8 +90,13 @@ const Products = () => {
 							data-testid={dataTestIds.linkId.inspect}
 							className='mx-2 italic'
 						>
-							View
+							inspect
 						</Link>
+						{user.role === 'admin' ? (
+							<AdminPanel product={product} />
+						) : (
+							<UserPanel product={product} />
+						)}
 					</div>
 				))}
 			</div>
