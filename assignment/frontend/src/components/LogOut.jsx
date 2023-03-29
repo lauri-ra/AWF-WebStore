@@ -10,12 +10,9 @@ const LogOut = () => {
 
 	useEffect(() => {
 		dispatch(logOut());
-		console.log('L state', location.state);
 		if (location.state.from === '/products' || location.state.from === '/') {
-			console.log('going nowhere');
 			navigate(location.state.from);
 		} else {
-			console.log('back to login');
 			navigate('/login');
 		}
 	}, [dispatch, navigate, location]);

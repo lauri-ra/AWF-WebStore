@@ -75,7 +75,7 @@ const ProductModify = () => {
 			console.log('getting single product to mod');
 			dispatch(getProduct(id));
 		}
-	});
+	}, []);
 
 	const product = products.find((item) => item.id === id);
 

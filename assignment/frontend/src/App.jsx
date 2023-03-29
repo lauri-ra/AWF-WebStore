@@ -8,7 +8,7 @@ import Notification from './components/Notification';
 import Products from './components/Products';
 import Product from './components/Product';
 import LogOut from './components/LogOut';
-import LoginForm from './components/LoginForm';
+import LoginPage from './components/LoginPage';
 import Register from './components/Register';
 import ProductModify from './components/ProductModify';
 import Users from './components/Users';
@@ -40,7 +40,7 @@ const App = () => {
 				<Route path='/products/' element={<Products />} />
 				<Route path='/products/:id' element={<Product />} />
 				<Route path='products/:id/modify' element={<ProductModify />} />
-				<Route path='/login' element={<LoginForm />} />
+				<Route path='/login' element={<LoginPage />} />
 				<Route path='/logout' element={<LogOut />} />
 				<Route path='/register' element={<Register />} />
 				<Route path='/users' element={<Users />} />
