@@ -1,7 +1,3 @@
-/** @format */
-
-// PRODUCT ACTION CREATORS
-
 import axios from 'axios';
 
 import {
@@ -22,8 +18,8 @@ const instance = axios.create({
  * @description Asynchronous Action creator for getting a single product.
  * Dispatches an action with type GET_PRODUCT through thunk if succesful
  * or NEW_NOTIFICATION-type and error message from db in the payload
- * @param {String} productId - The id of the product to get
- * @return {Function} - Thunk -> action
+ * @param {string} productId - The id of the product to get
+ * @returns {Function} - Thunk -> action
  */
 export const getProduct = (productId) => {
 	return async (dispatch) => {
@@ -49,7 +45,7 @@ export const getProduct = (productId) => {
  * it receives from DB to the frontends redux-stores product-state.
  * Dispatches GET_PRODUCTS with products as payload if succesfull,
  * or NEW_NOTIFICATION-type and error message from db in the payload
- * @return {Function} - Thunk -> action
+ * @returns {Function} - Thunk -> action
  */
 export const getProducts = () => {
 	return async (dispatch) => {
@@ -79,8 +75,8 @@ export const getProducts = () => {
  * a NEW_NOTIFICATION-type action to the frontends notification state along
  * with the error message from db as an unsuccessfull message. If the error
  * itself is an object, then it should pass whatever is inside the object.
- *  * @param {Object} productToAdd - The product to add
- * @return {Function} - Thunk -> action
+ * @param {object} productToAdd - The product to add
+ * @returns {Function} - Thunk -> action
  */
 export const addProduct = (productToAdd) => {
 	return async (dispatch) => {
@@ -123,8 +119,8 @@ export const addProduct = (productToAdd) => {
  * message. If the response is not ok, it only dispatches a NEW_NOTIFICATION-type
  * action to the frontends notification state along with the error message from db
  * as an unsuccessfull message.
- * @param {Object} productToUpdate - The product with updated values
- * @return {Function} - Thunk -> action
+ * @param {object} productToUpdate - The product with updated values
+ * @returns {Function} - Thunk -> action
  */
 export const updateProduct = (productToUpdate) => {
 	return async (dispatch) => {
@@ -161,8 +157,8 @@ export const updateProduct = (productToUpdate) => {
  * as a successful message. If the response is not ok, it only dispatches a
  * NEW_NOTIFICATION-type action to the frontends notification state along with the
  * error message from db as an unsuccessfull message.
- * @param {String} productId - The id of the product to delete
- * @return {Function} redux thunk -> action
+ * @param {string} productId - The id of the product to delete
+ * @returns {Function} redux thunk -> action
  */
 export const deleteProduct = (productId) => {
 	return async (dispatch) => {

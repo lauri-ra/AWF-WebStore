@@ -1,6 +1,3 @@
-/** @format */
-
-// CART ACTION CREATORS
 
 import {
 	ADD_CART_ITEM,
@@ -16,7 +13,7 @@ import {
  * @description Action creator that initiates the cart after page is refreshed.
  * Sends an INIT_CART-type action along with pre-existing cart-items stored locally as
  * payload to the frontends redux-stores product-state.
- * @return {Object} action
+ * @returns {object} action that initiates the cart 
  */
 export const initCart = () => {
 	const cart = localStorage.getItem('cart');
@@ -37,8 +34,8 @@ export const initCart = () => {
  * Dispatches an ADD_CART_ITEM-type action along with product as payload to the
  * frontends redux-stores product-state, as well as a NEW_NOTIFICATION action to the
  * frontends notification-state with a succesful message using cartMsg.add
- * @param {String} product - The product item to add
- * @return {Function} thunk
+ * @param {string} product - The product item to add
+ * @returns {Function} thunk that adds an item to the cart
  */
 export const addCartItem = (product) => {
 	return (dispatch) => {
@@ -68,8 +65,8 @@ export const addCartItem = (product) => {
  * @description Action creator that removes a cart item from local storage.
  * Sends a REMOVE_CART_ITEM-type action along with product as payload to the
  * frontends redux-stores product-state.
- * @param {String} product - The product item to remove from cart
- * @return {Object} Action
+ * @param {string} product - The product item to remove from cart
+ * @returns {object} Action that removes an item from the cart
  */
 export const removeCartItem = (product) => {
 	const cart = JSON.parse(localStorage.getItem('cart'));
@@ -90,8 +87,8 @@ export const removeCartItem = (product) => {
  * { productId, amount: 1 } as payload to the frontends redux-stores product-state.
  * Also sends NEW_NOTIFICATION-type action with payload of a message informing the items
  * amount is updated (use cartMsg.update).
- * @param {String} productId - The cart item id to increment
- * @return {Function} thunk
+ * @param {string} productId - The cart item id to increment
+ * @returns {Function} thunk that increments an item quantity
  */
 export const incrementCartItem = (productId) => {
 	const cart = JSON.parse(localStorage.getItem('cart'));
@@ -124,9 +121,8 @@ export const incrementCartItem = (productId) => {
  * update details  { productId, amount: -1 } as payload to the frontends
  * redux-stores product-state. Also sends NEW_NOTIFICATION-type action with payload of
  * a message informing the items amount is updated (use cartMsg.update)
- *
- * @param {String} productId - The cart item id to decrement
- * @return {Function} thunk
+ * @param {string} productId - The cart item id to decrement
+ * @returns {Function} thunk that decrements the item quantity
  */
 export const decrementCartItem = (productId) => {
 	const cart = JSON.parse(localStorage.getItem('cart'));
@@ -157,7 +153,7 @@ export const decrementCartItem = (productId) => {
 /**
  * @description An action creator which removes the entire cart-item from local store.
  * Returns an action with EMPTY_CART-type to remove cart all items.
- * @returns {Object} the action
+ * @returns {object} the action for clearing the cart
  */
 export const emptyCart = () => {
 	localStorage.setItem('cart', []);

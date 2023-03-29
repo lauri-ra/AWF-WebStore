@@ -1,5 +1,3 @@
-/** @format */
-
 import axios from 'axios';
 
 import {
@@ -30,8 +28,7 @@ const validEmailRegex =
  * 1) INIT_AUTH with user as payload.
  * If the response is not ok, it only dispatches a NEW_NOTIFICATION-type action to the frontends
  * notification state along with the error message from db as an unsuccessfull message.
- *
- * @returns {Function}
+ * @returns {Function} action that initiates authorization
  */
 export const initAuth = () => {
 	return async (dispatch) => {
@@ -64,9 +61,8 @@ export const initAuth = () => {
  * 2) succesfull notification with authMsg.welcomeBack as message.
  * If the response is not ok, it only dispatches a NEW_NOTIFICATION-type action to the frontends
  * notification state along with the error message from db as an unsuccessfull notification.
- *
- * @param {Object} logInCreds - The credentials used to login, contains username and password
- * @returns {Function} action
+ * @param {object} logInCreds - The credentials used to login, contains username and password
+ * @returns {Function} action for logging in
  */
 export const logIn = (logInCreds) => {
 	return async (dispatch) => {
@@ -118,7 +114,7 @@ export const logIn = (logInCreds) => {
  * 2) CLEAR_ORDERS and
  * 3) CLEAR_USERS as well as
  * 4) NEW_NOTIFICATION with succesfull message from the backend as payload to the reducers.
- * @returns {Function}
+ * @returns {Function} action that logs the user out
  */
 export const logOut = () => {
 	return async (dispatch) => {
@@ -160,8 +156,8 @@ export const logOut = () => {
  *  If the server responds with an error, it only dispatches a NEW_NOTIFICATION-type action to the
  * frontends notification state along with the error message from db as an unsuccessfull notification.
  * If the error itself is an object, then it should pass whatever is inside the object.
- * @param registerCreds - The data of the user
- * @returns {Function}
+ * @param {object} registerCreds - The data of the user
+ * @returns {Function} action that registers a new user
  */
 export const register = (registerCreds) => {
 	return async (dispatch) => {
