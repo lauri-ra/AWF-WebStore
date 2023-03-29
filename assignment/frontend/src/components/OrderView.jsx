@@ -4,6 +4,10 @@ import { dataTestIds } from '../tests/constants/components';
 import { getOrder } from '../redux/actionCreators/ordersActions';
 import { useEffect } from 'react';
 
+/**
+ *
+ * @returns OrderView component. Displays a specific order with the given id.
+ */
 const OrderView = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();

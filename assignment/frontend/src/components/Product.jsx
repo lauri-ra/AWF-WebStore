@@ -5,6 +5,15 @@ import { dataTestIds } from '../tests/constants/components';
 import { deleteProduct, getProduct } from '../redux/actionCreators/productsActions';
 import { addCartItem, incrementCartItem } from '../redux/actionCreators/cartActions';
 
+/**
+ *
+ * @param {function} handleAdd
+ * @param {function} handleDelete
+ * @param {object} product
+ * @param {object} user
+ * @returns Specific product card with its details.
+ * Also calls add and delete functions to manipulate the product.
+ */
 const ProdcutCard = ({ handleAdd, handleDelete, product, user }) => {
 	return (
 		<div
@@ -45,6 +54,11 @@ const ProdcutCard = ({ handleAdd, handleDelete, product, user }) => {
 	);
 };
 
+/**
+ *
+ * @returns Product component. Displays a specific product with the given id.
+ * Contains the functions for adding to cart or deleting them from the db / state.
+ */
 const Product = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();

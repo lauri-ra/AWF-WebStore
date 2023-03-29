@@ -3,6 +3,11 @@ import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { logOut } from '../redux/actionCreators/authActions';
 
+/**
+ *
+ * @returns LogOut component. Logs out the user and keeps the current page or
+ * navigates to the login page if the user is not on the home or products page.
+ */
 const LogOut = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();

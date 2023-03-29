@@ -7,6 +7,11 @@ import { dataTestIds } from '../tests/constants/components';
 
 import ProductCreator from './ProductCreator';
 
+/**
+ *
+ * @param {object} product
+ * @returns Panel component for the user. Contains the add to cart button and functions for it.
+ */
 const UserPanel = ({ product }) => {
 	const dispatch = useDispatch();
 
@@ -41,6 +46,11 @@ const UserPanel = ({ product }) => {
 	);
 };
 
+/**
+ *
+ * @param {object} product
+ * @returns Panel component for the admin. Contains modify and delete buttons and functions for them.
+ */
 const AdminPanel = ({ product }) => {
 	const dispatch = useDispatch();
 
@@ -69,6 +79,11 @@ const AdminPanel = ({ product }) => {
 	);
 };
 
+/**
+ *
+ * @returns Products component. Gets all the products and lists them.
+ * Depending on the user's role, it will show the admin panel & ProductCreator or the user panel.
+ */
 const Products = () => {
 	const dispatch = useDispatch();
 	const products = useSelector((state) => state.products);

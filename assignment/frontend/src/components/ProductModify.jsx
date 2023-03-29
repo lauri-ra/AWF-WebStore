@@ -4,6 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { dataTestIds } from '../tests/constants/components';
 import { updateProduct, getProduct } from '../redux/actionCreators/productsActions';
 
+/**
+ *
+ * @returns ModifyButtons component. Contains buttons for submitting or cancelling the form.
+ */
 const ModifyButtons = () => {
 	const navigate = useNavigate();
 	return (
@@ -28,6 +32,11 @@ const ModifyButtons = () => {
 	);
 };
 
+/**
+ *
+ * @param {function} product
+ * @returns ModifyForm component. Contains the form for modifying a product.
+ */
 const ModifyForm = ({ product }) => {
 	return (
 		<div>
@@ -63,6 +72,11 @@ const ModifyForm = ({ product }) => {
 	);
 };
 
+/**
+ *
+ * @returns ProductModify component. Contains the form for modifying a product.
+ * Also functions for fetching and updating a product.
+ */
 const ProductModify = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();

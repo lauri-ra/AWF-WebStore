@@ -4,6 +4,11 @@ import { Link } from 'react-router-dom';
 import { getOrders } from '../redux/actionCreators/ordersActions';
 import { dataTestIds } from '../tests/constants/components';
 
+/**
+ *
+ * @param {object} orders
+ * @returns Lists all orders and links to inspect each order.
+ */
 const AllOrders = ({ orders }) => {
 	return (
 		<div className='mx-5 grid grid-cols-4 place-items-center gap-3 pt-3'>
@@ -29,6 +34,10 @@ const AllOrders = ({ orders }) => {
 	);
 };
 
+/**
+ *
+ * @returns Fetches all orders from the backend or the state and displays them.
+ */
 const Orders = () => {
 	const dispatch = useDispatch();
 	const orders = useSelector((state) => state.orders);

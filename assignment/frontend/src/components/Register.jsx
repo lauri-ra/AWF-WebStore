@@ -5,6 +5,15 @@ import { register } from '../redux/actionCreators/authActions';
 import { useField } from '../hooks';
 import { useNavigate } from 'react-router-dom';
 
+/**
+ *
+ * @param {object} name
+ * @param {object} email
+ * @param {object} password
+ * @param {object} pwConfirmation
+ * @param {function} handleRegister
+ * @returns Form component with inputs and button for registration.
+ */
 const RegisterForm = ({ name, email, password, pwConfirmation, handleRegister }) => {
 	return (
 		<form className='flex flex-col' data-testid={dataTestIds.containerId.form}>
@@ -43,6 +52,12 @@ const RegisterForm = ({ name, email, password, pwConfirmation, handleRegister })
 	);
 };
 
+/**
+ *
+ * @returns Register component with form for registering a new user.
+ * Contains functions for handling input changes, submitting the form and
+ * navigating to the home page with successful registration.
+ */
 const Register = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();

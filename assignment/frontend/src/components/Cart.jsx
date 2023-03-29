@@ -8,6 +8,13 @@ import {
 	removeCartItem,
 } from '../redux/actionCreators/cartActions';
 
+/**
+ *
+ * @param {object} item
+ * @param {function} handleDecrease
+ * @param {function} handleIncrease
+ * @returns Component for specific item in cart.
+ */
 const CartItem = ({ item, handleDecrease, handleIncrease }) => {
 	return (
 		<div data-testid={`list-item-${item.product.id}-container`}>
@@ -32,6 +39,11 @@ const CartItem = ({ item, handleDecrease, handleIncrease }) => {
 	);
 };
 
+/**
+ *
+ * @param {function} createOrder
+ * @returns Button to place an order
+ */
 const OrderButton = ({ createOrder }) => {
 	return (
 		<button
@@ -44,6 +56,10 @@ const OrderButton = ({ createOrder }) => {
 	);
 };
 
+/**
+ *
+ * @returns Cart component. Displays the items in the cart and allows the user to place an order.
+ */
 const Cart = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();

@@ -4,6 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { dataTestIds } from '../tests/constants/components';
 import { updateUser, getUser } from '../redux/actionCreators/usersActions';
 
+/**
+ *
+ * @param {string} selectedOption
+ * @param {function} handleOptionChange
+ * @returns Select component that allows the user to select a role.
+ */
 const RoleSelect = ({ selectedOption, handleOptionChange }) => {
 	return (
 		<select
@@ -18,6 +24,12 @@ const RoleSelect = ({ selectedOption, handleOptionChange }) => {
 	);
 };
 
+/**
+ *
+ * @param {obect} user
+ * @param {string} selectedOption
+ * @returns Button component that allows the user to submit or cancel the changes.
+ */
 const ModfiyButtons = ({ user, selectedOption }) => {
 	const navigate = useNavigate();
 	const isDisabled = selectedOption === user.role;
@@ -43,6 +55,12 @@ const ModfiyButtons = ({ user, selectedOption }) => {
 	);
 };
 
+/**
+ *
+ * @returns UserModify component. Gets the user by id and allows the user to modify them.
+ * Fetches the user if it is not in the store. Also contains functions handling option
+ * changes and updates to user status
+ */
 const UserModify = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();

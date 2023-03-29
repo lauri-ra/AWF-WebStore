@@ -4,6 +4,11 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { dataTestIds } from '../tests/constants/components';
 import { getUser, removeUser } from '../redux/actionCreators/usersActions';
 
+/**
+ *
+ * @param {object} user
+ * @returns Panel component that ontains the modify and delete buttons and functions for them.
+ */
 const BottomPanel = ({ user }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -34,6 +39,10 @@ const BottomPanel = ({ user }) => {
 	);
 };
 
+/**
+ *
+ * @returns User component. Gets the user by id and displays it.
+ */
 const User = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();

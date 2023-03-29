@@ -5,6 +5,15 @@ import { useField } from '../hooks';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
+/**
+ *
+ * @param {function} handleLogin
+ * @param {object} email
+ * @param {object} password
+ * @returns Form component with inputs and button for login.
+ * Uses the input parameters to set the values of the inputs and
+ * submits the form.
+ */
 const LoginForm = ({ handleLogin, email, password }) => {
 	return (
 		<form className='flex flex-col' data-testid={dataTestIds.containerId.form}>
@@ -31,6 +40,10 @@ const LoginForm = ({ handleLogin, email, password }) => {
 	);
 };
 
+/**
+ *
+ * @returns Login page component
+ */
 const LoginPage = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();

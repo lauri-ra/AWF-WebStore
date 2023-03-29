@@ -3,6 +3,10 @@ import { useEffect, useState } from 'react';
 import { dataTestIds } from '../tests/constants/components';
 import { removeNotification } from '../redux/actionCreators/notificationsActions';
 
+/**
+ *
+ * @returns Notification component. Displays a notification message for 4.5 seconds.
+ */
 const Notification = () => {
 	const [message, setMessage] = useState('');
 	const [timer, setTimer] = useState(null);

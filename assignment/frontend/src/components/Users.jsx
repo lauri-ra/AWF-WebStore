@@ -4,6 +4,11 @@ import { Link } from 'react-router-dom';
 import { getUsers, removeUser } from '../redux/actionCreators/usersActions';
 import { dataTestIds } from '../tests/constants/components';
 
+/**
+ *
+ * @param {object} user
+ * @returns Panel component that ontains the modify and delete buttons and functions for them.
+ */
 const BottomPanel = ({ user }) => {
 	const dispatch = useDispatch();
 
@@ -32,6 +37,10 @@ const BottomPanel = ({ user }) => {
 	);
 };
 
+/**
+ *
+ * @returns Users component. Gets all users and displays them.
+ */
 const Users = () => {
 	const dispatch = useDispatch();
 	const users = useSelector((state) => state.users);

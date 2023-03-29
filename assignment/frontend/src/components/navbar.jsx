@@ -2,6 +2,10 @@ import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { dataTestIds } from '../tests/constants/components';
 
+/**
+ *
+ * @returns Navbar component for user. Includes links to cart, login and register.
+ */
 const UserNav = () => {
 	return (
 		<>
@@ -18,6 +22,10 @@ const UserNav = () => {
 	);
 };
 
+/**
+ *
+ * @returns Navbar component for customer. Includes links to orders, cart and logout
+ */
 const CustomerNav = () => {
 	const location = useLocation();
 	return (
@@ -40,6 +48,10 @@ const CustomerNav = () => {
 	);
 };
 
+/**
+ *
+ * @returns Navbar component for admin. Includes links to orders, users and logout
+ */
 const AdminNav = () => {
 	const location = useLocation();
 	return (
@@ -62,6 +74,11 @@ const AdminNav = () => {
 	);
 };
 
+/**
+ *
+ * @returns Main navbar component. Includes links to home, products and profile, that are
+ * always visible. Also other nav components depending on the user role.
+ */
 const Navbar = () => {
 	const user = useSelector((state) => state.auth);
 

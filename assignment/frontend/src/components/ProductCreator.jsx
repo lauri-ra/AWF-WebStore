@@ -4,6 +4,11 @@ import { useField } from '../hooks';
 import { addProduct } from '../redux/actionCreators/productsActions';
 import { dataTestIds } from '../tests/constants/components';
 
+/**
+ *
+ * @param {function} toggleVisibility
+ * @returns Button component that toggles the visibility of the form.
+ */
 const AddProductBtn = ({ toggleVisibility }) => {
 	return (
 		<div className='flex justify-center' data-testid={dataTestIds.clickId.add}>
@@ -17,6 +22,15 @@ const AddProductBtn = ({ toggleVisibility }) => {
 	);
 };
 
+/**
+ *
+ * @param {function} handleSubmit
+ * @param {object} name
+ * @param {object} price
+ * @param {object} description
+ * @param {function} toggleVisibility
+ * @returns Form component that creates a new product.
+ */
 const CreatorForm = ({ handleSubmit, name, price, description, toggleVisibility }) => {
 	return (
 		<div className='my-2 flex justify-center border-2'>
@@ -50,9 +64,16 @@ const CreatorForm = ({ handleSubmit, name, price, description, toggleVisibility 
 	);
 };
 
+/**
+ *
+ * @returns ProductCreator component that renders a form to create a new product.
+ * Includes functions for adding a new product and toggling the visibility of the form.
+ */
 const ProductCreator = () => {
 	const [visible, setVisible] = useState(false);
+
 	const dispatch = useDispatch();
+
 	const name = useField('text');
 	const price = useField('text');
 	const description = useField('text');
