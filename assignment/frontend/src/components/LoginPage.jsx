@@ -37,12 +37,6 @@ const LoginPage = () => {
 
 	const auth = useSelector((state) => state.auth);
 
-	useEffect(() => {
-		if (auth.role !== 'guest') {
-			navigate('/');
-		}
-	}, [auth.role]);
-
 	const email = useField('text');
 	const password = useField('password');
 
@@ -56,6 +50,14 @@ const LoginPage = () => {
 
 		dispatch(logIn(loginCreds));
 	};
+
+	useEffect(() => {
+		// Check if the user is authenticated and has a valid role
+		if (auth.role === 'customer' || auth.role === 'admin') {
+			// Navigate to the home page
+			navigate('/');
+		}
+	}, [auth]);
 
 	return (
 		<div>

@@ -76,7 +76,6 @@ const Products = () => {
 
 	useEffect(() => {
 		if (products.length <= 1) {
-			console.log('getting all products');
 			dispatch(getProducts());
 		}
 	}, []);

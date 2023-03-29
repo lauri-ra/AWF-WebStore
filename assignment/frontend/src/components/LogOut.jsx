@@ -13,7 +13,10 @@ const LogOut = () => {
 		if (location.state.from === '/products' || location.state.from === '/') {
 			navigate(location.state.from);
 		} else {
-			navigate('/login');
+			// Timeout to wait for the state to change before navigating
+			setTimeout(() => {
+				navigate('/login');
+			}, 100);
 		}
 	}, [dispatch, navigate, location]);
 
