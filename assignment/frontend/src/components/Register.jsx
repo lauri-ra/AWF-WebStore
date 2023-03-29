@@ -1,4 +1,5 @@
-import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { dataTestIds } from '../tests/constants/components';
 import { register } from '../redux/actionCreators/authActions';
 import { useField } from '../hooks';
@@ -46,6 +47,8 @@ const Register = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
+	const auth = useSelector((state) => state.auth);
+
 	const name = useField('text');
 	const email = useField('text');
 	const password = useField('password');
@@ -62,8 +65,15 @@ const Register = () => {
 		};
 
 		dispatch(register(registerCreds));
-		navigate('/');
 	};
+
+	useEffect(() => {
+		// Check if the user is authenticated and has a valid role
+		if (auth.role === 'customer' || auth.role === 'admin') {
+			// Navigate to the home page
+			navigate('/');
+		}
+	}, [auth]);
 
 	return (
 		<div>
