@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts, deleteProduct } from '../redux/actionCreators/productsActions';
-import { addCartItem } from '../redux/actionCreators/cartActions';
+import { addCartItem, incrementCartItem } from '../redux/actionCreators/cartActions';
 import { dataTestIds } from '../tests/constants/components';
 
 import ProductCreator from './ProductCreator';
@@ -11,8 +11,23 @@ const UserPanel = ({ product }) => {
 	const dispatch = useDispatch();
 
 	const handleAdd = () => {
+		const cart = JSON.parse(localStorage.getItem('cart'));
 		const { image, ...cartProduct } = product;
-		dispatch(addCartItem(cartProduct));
+
+		if (cart.length === 0) {
+			console.log('added to cart because cart was empty');
+			dispatch(addCartItem(cartProduct));
+			return;
+		}
+
+		const existingItem = cart.find((item) => item.product.id === product.id);
+		if (existingItem) {
+			console.log('incremented item since it already existed');
+			dispatch(incrementCartItem(existingItem.product.id));
+		} else {
+			console.log('added to cart because it did not exist');
+			dispatch(addCartItem(cartProduct));
+		}
 	};
 
 	return (

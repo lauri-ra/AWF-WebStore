@@ -56,7 +56,7 @@ const Cart = () => {
 	return (
 		<div data-testid={dataTestIds.containerId.main}>
 			{cart.length === 0 ? (
-				<div>cart empty</div>
+				<div data-testid={dataTestIds.containerId.empty}>cart empty</div>
 			) : (
 				<div>
 					{cart.map((item) => (
@@ -69,7 +69,7 @@ const Cart = () => {
 					))}
 
 					<button
-						data-testid={dataTestIds.clickId.add}
+						data-testid={dataTestIds.clickId.submit}
 						onClick={createOrder}
 						className='my-2 rounded-md bg-sky-500 px-2 py-1 font-semibold text-white hover:bg-sky-400'
 					>
